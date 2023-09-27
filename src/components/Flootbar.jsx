@@ -15,21 +15,23 @@ const Flootbar = ({ data }) => {
 
   return (
     <div className="flex items-center justify-between">
+      <Timeseries />;
       {Object.entries(rates).map(([currency, rate]) => {
         // Calculate the value of the pairing currency in terms of NGN
         const valueInNGN = usdToNgnRate / rate;
 
         return (
-          <div
-            key={currency}
-            className="border border-r-0 border-black font-robotoFont text-[13px] font-bold"
-          >
-            <div className="w-[220px] p-4 flex items-center justify-between">
-              <div>NGN/{currency}</div>
-              <div>{valueInNGN.toFixed(2)}</div>
+          <>
+            <div
+              key={currency}
+              className="border border-r-0 border-black font-robotoFont text-[13px] font-bold"
+            >
+              <div className="w-[220px] p-4 flex items-center justify-between">
+                <div>NGN/{currency}</div>
+                <div>{valueInNGN.toFixed(2)}</div>
+              </div>
             </div>
-            <Timeseries />;
-          </div>
+          </>
         );
       })}
     </div>

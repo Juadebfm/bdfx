@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const Flootbar = ({ data }) => {
   // Check if data exists before displaying it
@@ -19,7 +20,10 @@ const Flootbar = ({ data }) => {
         const valueInNGN = usdToNgnRate / rate;
 
         return (
-          <div key={currency} className="border border-r-0 border-black font-robotoFont text-[13px] font-bold">
+          <div
+            key={currency}
+            className="border border-r-0 border-black font-robotoFont text-[13px] font-bold"
+          >
             <div className="w-[220px] p-4 flex items-center justify-between">
               <div>NGN/{currency}</div>
               <div>{valueInNGN.toFixed(2)}</div>

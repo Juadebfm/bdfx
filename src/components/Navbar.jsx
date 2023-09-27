@@ -10,13 +10,11 @@ const Navbar = () => {
   const [data, setData] = useState(null);
 
   const apiKey = process.env.NEXT_PUBLIC_RAPIDAPI_KEY;
-  const apiHost = process.env.NEXT_PUBLIC_RAPIDAPI_HOST;
 
   //Use Effect
   useEffect(() => {
     const fetchData = async () => {
-      const url =
-        "https://api.currencybeacon.com/v1/latest?api_key=BntwBy7KMtxjffTe21o6I2ESYMNZBcGP";
+      const url = `https://api.currencybeacon.com/v1/latest?api_key=${apiKey}`;
       const options = {
         method: "GET",
       };

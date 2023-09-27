@@ -3,3 +3,21 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&family=Rubik:wght@400;500;600;700&display=swap");
+
+/* CSS for the scrolling animation */
+.scroll {
+  white-space: nowrap;
+  width: 100%;
+  animation: scroll 20s linear infinite; /* Adjust the duration as needed */
+  overflow: hidden;
+}
+
+/* Keyframes for the scrolling animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

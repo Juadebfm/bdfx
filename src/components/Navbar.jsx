@@ -29,7 +29,7 @@ const Navbar = () => {
     };
 
     fetchData();
-  }, []);
+  }, [apiKey]);
 
   return (
     <>

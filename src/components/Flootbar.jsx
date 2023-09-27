@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import Timeseries from "./Timeseries";
 
 const Flootbar = ({ data }) => {
   // Check if data exists before displaying it
@@ -28,6 +28,7 @@ const Flootbar = ({ data }) => {
               <div>NGN/{currency}</div>
               <div>{valueInNGN.toFixed(2)}</div>
             </div>
+            <Timeseries />;
           </div>
         );
       })}

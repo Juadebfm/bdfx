@@ -1,0 +1,155 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { UserAuth } from "@/app/context/AuthContext";
+import { useEffect, useState } from "react";
+import { BiMenu } from "react-icons/bi";
+
+export default function NavBar() {
+  const router = usePathname();
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { user, googleSignIn, logOut } = UserAuth();
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSignIn = async () => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      setLoading(false);
+    };
+    checkAuthentication();
+  }, [user]);
+
+  return (
+    <nav className="bdfx_flex bdfx_nav_font text-base w-[100%] p-5">
+      <div>
+        <Link href="/" passHref>
+          <Image
+            src="https://res.cloudinary.com/juadeb/image/upload/v1696431204/BDFX/bdfx_fx_tts8nv.png"
+            alt="BDFX Logo"
+            width={300}
+            height={100}
+            className="hidden sm:block"
+          />
+          <Image
+            src="https://res.cloudinary.com/juadeb/image/upload/v1696431204/BDFX/bdfx_mobile_fx_xfmhfi.png"
+            alt="BDFX Logo"
+            width={100}
+            height={100}
+            className="block sm:hidden"
+          />
+        </Link>
+      </div>
+      <div className={`sm:flex space-x-8 ${isMenuOpen ? "block" : "hidden"}`}>
+        <Link href="/" passHref>
+          <div
+            className={`font-medium ${
+              router === "/"
+                ? "border-b-2 text-bdfx_red border-bdfx_red"
+                : "text-black"
+            }`}
+          >
+            Home
+          </div>
+        </Link>
+        <Link href="/rates" passHref>
+          <div
+            className={`font-medium ${
+              router === "/rates"
+                ? "border-b-2 text-bdfx_red border-bdfx_red"
+                : "text-black"
+            }`}
+          >
+            Rates
+          </div>
+        </Link>
+        <Link href="/businessnews" passHref>
+          <div
+            className={`font-medium ${
+              router === "/businessnews"
+                ? "border-b-2 text-bdfx_red border-bdfx_red"
+                : "text-gray-700"
+            }`}
+          >
+            Business News
+          </div>
+        </Link>
+        <Link href="/cryptorates" passHref>
+          <div
+            className={`font-medium ${
+              router === "/cryptorates"
+                ? "border-b-2 text-bdfx_red border-bdfx_red"
+                : "text-gray-700"
+            }`}
+          >
+            Crypto Rates
+          </div>
+        </Link>
+        <Link href="/analytics" passHref>
+          <div
+            className={`font-medium ${
+              router === "/analytics"
+                ? "border-b-2 text-bdfx_red border-bdfx_red"
+                : "text-gray-700"
+            }`}
+          >
+            Analytics
+          </div>
+        </Link>
+        <Link href="/contact" passHref>
+          <div
+            className={`font-medium ${
+              router === "/contact"
+                ? "border-b-2 text-bdfx_red border-bdfx_red"
+                : "text-gray-700"
+            }`}
+          >
+            Contact
+          </div>
+        </Link>
+      </div>
+      {user ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 cursor-pointer">
+          <p className="text-lg font-semibold w-10 h-10 bg-bdfx_red rounded-full flex items-center justify-center text-white">
+            {user.displayName.charAt(0)}
+          </p>
+          <button
+            className="px-7 py-2 bg-bdfx_red text-white"
+            onClick={handleSignOut}
+          >
+            SignOut
+          </button>
+        </div>
+      ) : (
+        <div className="">
+          <button
+            className="px-6 py-3 bg-bdfx_red text-white"
+            onClick={handleSignIn}
+          >
+            SignIn
+          </button>
+        </div>
+      )}
+    </nav>
+  );
+}

@@ -211,11 +211,7 @@ const Navbar = () => {
             >
               Analytics
             </Link>
-            <Link
-              href="/cryptorates"
-              className={pathname == "/cryptorates" ? "active_class" : ""}
-              passHref
-            >
+            <Link href="https://conferences.businessday.ng/" passHref>
               BD Conferences
             </Link>
 

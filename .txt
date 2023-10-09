@@ -1,0 +1,17 @@
+        {formattedRatesData.map((rate, index) => (
+          <div key={index} className="flex flex-col">
+            <div className="border border-black h-14">
+              {rate.props.children.props.children}
+            </div>
+          </div>
+        ))}
+
+          // Retrieve the data from local storage
+  const formattedRatesData = JSON.parse(localStorage.getItem("formattedRates"));
+
+           <Image
+            src="https://res.cloudinary.com/juadeb/image/upload/v1696790532/BDFX/news_zp7sij.png"
+            width={636}
+            height={305}
+            alt="Markets"
+          />

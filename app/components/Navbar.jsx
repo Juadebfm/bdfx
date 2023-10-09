@@ -112,9 +112,9 @@ const Navbar = () => {
         // Set the state with the formatted conversion rates
         setFormattedRates(formattedRatesData);
 
-        // Save the formatted rates in local storage
+        // Save the converted rates in local storage
         localStorage.setItem(
-          "formattedRates",
+          "convertedRates",
           JSON.stringify(formattedRatesData)
         );
         localStorage.setItem("lastFetchTime", currentTime.toString());
@@ -128,11 +128,6 @@ const Navbar = () => {
   useEffect(() => {
     convertRates(); // Always try to fetch rates when the component mounts
   }, []);
-
-  // Retrieve the data from local storage
-  const formattedRatesDatas = JSON.parse(
-    localStorage.getItem("formattedRates")
-  );
 
   return (
     <header className="w-full">
@@ -170,16 +165,18 @@ const Navbar = () => {
                   repeatType: "loop",
                 }} // Set animation duration and loop
               >
-                {formattedRatesDatas.map((rate, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-center gap-10"
-                  >
-                    <div className="mr-8">
-                      {rate.props.children.props.children}
+                {convertedRates &&
+                  convertedRates.map((rate, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-center gap-10"
+                    >
+                      <div className="mr-8">
+                        {rate.old_currency}/{rate.new_currency} ={" "}
+                        {rate.new_amount}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </motion.div>
             </div>
           </div>

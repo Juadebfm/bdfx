@@ -81,6 +81,15 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Set body overflow when mobile menu opens/closes
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden"; // Prevent scrolling
+    } else {
+      document.body.style.overflow = "auto"; // Allow scrolling
+    }
+  }, [isMobileMenuOpen]);
+
   const formatConversionData = (data) => {
     return (
       <div>
@@ -228,7 +237,7 @@ const Navbar = () => {
         id="mobile_nav"
         className={`${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } absolute top-[44.5px] px-10 flex flex-col bg-black border-t-4 border-red-600 text-white w-1/2 h-[500px] transition-transform duration-300 ease-in-out transform`}
+        } absolute top-[44.5px] px-10 flex flex-col bg-black border-t-4 border-red-600 text-white w-1/2 h-[100vh] transition-transform duration-300 ease-in-out transform`}
       >
         <Image
           src={logoImg}
@@ -237,7 +246,7 @@ const Navbar = () => {
           alt="Logo Image"
           className="m-auto mb-0 sm:mb-2 border border-white my-3 mt-8"
         />
-        <div className="flex flex-col mt-4 space-y-5 text-[14px]">
+        <div className="flex flex-col mt-4 space-y-5">
           <Link className="border-b border-gray-800 pb-4" href="/">
             Rates
           </Link>

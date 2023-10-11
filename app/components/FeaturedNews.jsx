@@ -73,7 +73,6 @@ const FeaturedNews = () => {
               src="https://res.cloudinary.com/juadeb/image/upload/v1696822115/BDFX/Nigeria_nnmx1v.webp"
               width={0}
               height={200}
-              objectFit="cover"
               className="!w-full"
               alt="Mohbad"
               unoptimized

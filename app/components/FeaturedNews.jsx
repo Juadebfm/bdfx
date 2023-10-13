@@ -46,7 +46,6 @@ const FeaturedNews = () => {
               src="https://res.cloudinary.com/juadeb/image/upload/v1696822115/BDFX/leadership-failure_qcyr3j.webp"
               width={0}
               height={200}
-              objectFit="cover"
               className="!w-full"
               alt="Mohbad"
               unoptimized

@@ -14,3 +14,7 @@ try {
 } catch (error) {
 	console.error(error);
 }
+
+
+        "X-RapidAPI-Key": "212eb6b3ddmsh09b08aa0756630cp1bad60jsnb17f34b14dea",
+        "X-RapidAPI-Host": "currency-converter-by-api-ninjas.p.rapidapi.com",

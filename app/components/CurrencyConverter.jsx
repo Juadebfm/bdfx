@@ -10,6 +10,7 @@ const CurrencyConverter = () => {
   const [convertedValue, setConvertedValue] = useState("");
   const [haveCurrency, setHaveCurrency] = useState("NGN"); // Set to "NGN" as default
   const [wantCurrency, setWantCurrency] = useState("AED"); // Set to the initial value from your secondSelectOptions
+  const [isConverting, setIsConverting] = useState(false);
 
   const secondSelectOptions = [
     "AED",
@@ -92,6 +93,7 @@ const CurrencyConverter = () => {
     setInputValue2("");
     setHaveCurrency("NGN");
     setWantCurrency(secondSelectOptions[0]);
+    setConvertedValue(""); // Reset the converted value as well
   };
 
   const handleCurrencyChange = (event) => {
@@ -103,11 +105,13 @@ const CurrencyConverter = () => {
   const debounceConvertCurrency = debounce((have, want, amount) => {
     // Make the API call with the current amount, "NGN" as have, and the selected wantCurrency
     convertCurrency(have, want, amount);
-  }, 500); // Adjust the delay time as needed
+  }, 1000); // Adjust the delay time as needed
 
   // This function handles the API call
   async function convertCurrency(haveCurrency, wantCurrency, amount) {
     try {
+      setIsConverting(true); // Conversion is in progress
+
       const result = await fetchCurrencyConversion(
         haveCurrency,
         wantCurrency,
@@ -204,8 +208,9 @@ const CurrencyConverter = () => {
               </label>
               <input
                 type="text"
-                placeholder="Amount"
-                value={inputValue2}
+                placeholder={
+                  isConverting ? `Converting to ${wantCurrency}` : "Amount"
+                }
                 onChange={handleInputChange2}
                 className="placeholder:font-lato placeholder:text-[14px] font-bold border-0 pl-0 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-full sm:w-auto"
                 value={convertedValue}

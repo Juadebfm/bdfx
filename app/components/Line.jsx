@@ -45,8 +45,7 @@ function LineChart() {
     };
 
     // Construct the URL
-    const url = `https://currency-conversion-and-exchange-rates.p.rapidapi.com/timeseries?start_date=${start_date}&end_date=${end_date}&from=${from}&to=${to}`;
-
+    const url = `https://currency-conversion-and-exchange-rates.p.rapidapi.com/timeseries?start_date=${start_date}&end_date=${end_date}&from=${from}&to=${to}`
     // Make the API request
     fetch(url, { method: "GET", headers })
       .then((response) => response.json())
@@ -156,7 +155,7 @@ function LineChart() {
         borderWidth: 0.1, // Increase line width
       },
       point: {
-        radius: 0.05, // Increase point size
+        radius: 3, // Increase point size
         borderWidth: 0.1, // Increase point border width
       },
     },
@@ -164,8 +163,8 @@ function LineChart() {
 
   return (
     <div>
-      <h1 className="font-bold text-3xl text-center">
-        Exchange Rate Line Chart
+      <h1 className="font-bold text-3xl text-black text-center">
+        Exchange Rates (Months)
       </h1>
       <div
         style={{

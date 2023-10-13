@@ -4,25 +4,25 @@ import Line from "./Line";
 
 const MySwiper = () => {
   return (
-    <div className="mt-14 px-5 sm:px-0 sm:mt-32 w-full sm:w-[80%] m-auto h-96 text-white">
+    <div className="mt-14 px-5 sm:px-0 sm:mt-8 w-full sm:w-[80%] m-auto h-max text-white">
       <Carousel
         showThumbs={false}
-        autoPlay
-        infiniteLoop
-        interval={5000}
+        // autoPlay
+        // infiniteLoop
+        // interval={5000}
         showArrows={false}
         showStatus={false}
       >
-        <div className="h-96 bg-blue-500">
-          <Line />{" "}
+        <div className="h-max w-[100%]">
+          <Line />
         </div>
-        <div className="h-96 bg-red-500">
+        <div className="h-max w-[100%]">
           <h1>Here</h1>
         </div>
-        <div className="h-96 bg-green-500">
+        <div className="h-max w-[100%]">
           <h1>Here</h1>
         </div>
-        <div className="h-96 bg-yellow-500">
+        <div className="h-max w-[100%]">
           <h1>Here</h1>
         </div>
       </Carousel>

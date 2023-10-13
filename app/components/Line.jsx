@@ -29,7 +29,7 @@ function LineChart() {
     // Calculate start_date (6 months ago) and end_date (current date)
     const today = new Date();
     const sixMonthsAgo = new Date();
-    sixMonthsAgo.setMonth(today.getMonth() - 6);
+    sixMonthsAgo.setMonth(today.getMonth() - 4);
 
     const start_date = sixMonthsAgo.toISOString().split("T")[0]; // Format as 'YYYY-MM-DD'
     const end_date = today.toISOString().split("T")[0]; // Format as 'YYYY-MM-DD'
@@ -56,14 +56,22 @@ function LineChart() {
 
         // Transform the data for the chart
         const labels = Object.keys(data.rates);
+        labels.sort((a, b) => new Date(a) - new Date(b)); // Sort labels in ascending order
+
         const selectedCurrency = "USD"; // Example: You can change this to any currency from 'to'
         const ngntoSelectedCurrency = labels.map(
           (date) => data.rates[date][selectedCurrency]
         );
 
+        // Format the date labels to "DD Mon" format
+        const formattedLabels = labels.map((date) => {
+          const options = { day: "2-digit", month: "short" };
+          return new Date(date).toLocaleDateString("en-US", options);
+        });
+
         // Create the chart data
         const transformedData = {
-          labels: labels,
+          labels: formattedLabels, // Use the formatted date labels
           datasets: [
             {
               label: `NGN to ${selectedCurrency}`,
@@ -100,8 +108,8 @@ function LineChart() {
       y: {
         ticks: {
           font: {
-            size: 17,
-            weight: "bold",
+            size: 14,
+            weight: "300",
           },
           stepSize: 0.02, // Increase the step size to adjust the scale intervals
           beginAtZero: false, // Set this to false to start the scale from the minimum data value
@@ -114,9 +122,9 @@ function LineChart() {
             bottom: 10,
           },
           font: {
-            size: 30,
+            size: 14,
             style: "italic",
-            family: "Arial",
+            family: "Sans-serif",
           },
         },
         min: 1.04, // Set the minimum value to 1.04
@@ -124,8 +132,8 @@ function LineChart() {
       x: {
         ticks: {
           font: {
-            size: 17,
-            weight: "bold",
+            size: 14,
+            weight: "300",
           },
         },
         title: {
@@ -135,9 +143,9 @@ function LineChart() {
             top: 10,
           },
           font: {
-            size: 30,
+            size: 14,
             style: "italic",
-            family: "Arial",
+            family: "sans-serif",
           },
         },
       },
@@ -166,7 +174,9 @@ function LineChart() {
         }}
         className="h-max w-[100%]"
       >
-        {chartData && <Line className="w-[100%]" data={chartData} options={options} />}
+        {chartData && (
+          <Line className="w-[100%]" data={chartData} options={options} />
+        )}
       </div>
     </div>
   );

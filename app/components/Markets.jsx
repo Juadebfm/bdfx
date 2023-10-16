@@ -6,7 +6,9 @@ import Link from "next/link";
 
 const Markets = () => {
   const [marketData, setMarketData] = useState([]);
+  const [newData, setNewData] = useState([]);
 
+  // First Feed API
   const fetchData = async () => {
     const url =
       "https://feed-reader1.p.rapidapi.com/feed/parse?url=https%3A%2F%2Fbusinessday.ng%2Fcategory%2Fmarkets%2Ffeed%2F&normalization=yes&iso_date_format=yes";
@@ -41,37 +43,74 @@ const Markets = () => {
       console.error(error);
     }
   };
+  // Second Feed API
+  const fetchNewData = async () => {
+    const newUrl =
+      "https://feed-reader1.p.rapidapi.com/feed/parse?url=https%3A%2F%2Fbusinessday.ng%2Ffeed%2F&normalization=yes&iso_date_format=yes";
+    const newOptions = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "212eb6b3ddmsh09b08aa0756630cp1bad60jsnb17f34b14dea",
+        "X-RapidAPI-Host": "feed-reader1.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await fetch(newUrl, newOptions);
+      const result = await response.json();
+      console.log(result);
+      // Extract entries from the new data
+      const newEntries = result.data.entries || [];
+
+      // Process the new data as needed
+      const formattedNewData = newEntries.map((entry) => ({
+        id: entry.id,
+        title: entry.title,
+        link: entry.link,
+        published: entry.published,
+      }));
+
+      // Set the new data in the state
+      setNewData(formattedNewData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  //First Feed API useEffect
+  useEffect(() => {
+    // Initial fetch when the component mounts
+    fetchData();
+    // Fetch the new data
+    fetchNewData();
+
+    // Set an interval to fetch data every 6 hours (in milliseconds)
+    const intervalId = setInterval(() => {
+      fetchData();
+      fetchNewData();
+    }, 6 * 60 * 60 * 1000);
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
 
   function formatDateTime(dateString) {
     const postDate = new Date(dateString);
     const currentDate = new Date();
     const timeDifference = Math.floor((currentDate - postDate) / 1000); // Calculate the time difference in seconds
-  
+
     if (timeDifference < 60) {
-      return `${timeDifference} second${timeDifference > 1 ? 's' : ''} ago`;
+      return `${timeDifference} second${timeDifference > 1 ? "s" : ""} ago`;
     } else if (timeDifference < 3600) {
       const minutesAgo = Math.floor(timeDifference / 60);
-      return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
+      return `${minutesAgo} minute${minutesAgo > 1 ? "s" : ""} ago`;
     } else if (timeDifference < 86400) {
       const hoursAgo = Math.floor(timeDifference / 3600);
-      return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
+      return `${hoursAgo} hour${hoursAgo > 1 ? "s" : ""} ago`;
     } else {
       const daysAgo = Math.floor(timeDifference / 86400);
-      return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+      return `${daysAgo} day${daysAgo > 1 ? "s" : ""} ago`;
     }
   }
-  
-
-  useEffect(() => {
-    // Initial fetch when the component mounts
-    fetchData();
-
-    // Set an interval to fetch data every 6 hours (in milliseconds)
-    const intervalId = setInterval(fetchData, 6 * 60 * 60 * 1000);
-
-    // Clear the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, []);
 
   return (
     <section className="mt-14 sm:mt-32 w-full sm:w-[80%] px-5 sm:px-0 m-auto text-center">
@@ -126,7 +165,20 @@ const Markets = () => {
               Recent News
             </span>
           </h3>
-          {/* Render your recent news items here */}
+          {newData.map((item) => (
+            <div key={item.id}>
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
+                <h3 className="text-2xl font-extrabold text-start leading-tight mt-3">
+                  {item.title}
+                </h3>
+                <small className="flex items-start justify-start gap-8 mt-1">
+                  <span className="font-roboto text-[12px] italic">
+                    {formatDateTime(item.published)}
+                  </span>
+                </small>
+              </a>
+            </div>
+          ))}
         </div>
       </div>
     </section>

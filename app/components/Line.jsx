@@ -29,7 +29,7 @@ function LineChart() {
     // Calculate start_date (6 months ago) and end_date (current date)
     const today = new Date();
     const sixMonthsAgo = new Date();
-    sixMonthsAgo.setMonth(today.getMonth() - 4);
+    sixMonthsAgo.setMonth(today.getMonth() - 1);
 
     const start_date = sixMonthsAgo.toISOString().split("T")[0]; // Format as 'YYYY-MM-DD'
     const end_date = today.toISOString().split("T")[0]; // Format as 'YYYY-MM-DD'
@@ -75,7 +75,7 @@ function LineChart() {
             {
               label: `NGN to ${selectedCurrency}`,
               data: ngntoSelectedCurrency,
-              borderColor: getRandomColor(),
+              borderColor: "black",
               borderWidth: 3,
             },
           ],

@@ -2,16 +2,75 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import format from "date-fns/format";
 import Link from "next/link";
 
 const Markets = () => {
-  const [currentDate, setCurrentDate] = useState("");
+  const [marketData, setMarketData] = useState([]);
+
+  const fetchData = async () => {
+    const url =
+      "https://feed-reader1.p.rapidapi.com/feed/parse?url=https%3A%2F%2Fbusinessday.ng%2Fcategory%2Fmarkets%2Ffeed%2F&normalization=yes&iso_date_format=yes";
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "212eb6b3ddmsh09b08aa0756630cp1bad60jsnb17f34b14dea",
+        "X-RapidAPI-Host": "feed-reader1.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      const entries = result.data.entries || [];
+
+      const imgUrl =
+        "https://res.cloudinary.com/juadeb/image/upload/v1697462709/BDFX/Business-Day-Grey_uxkrvk.jpg";
+
+      const formattedData = entries.map((entry) => ({
+        id: entry.id,
+        title: entry.title,
+        link: entry.link,
+        image: imgUrl,
+        author: entry.author,
+        description: entry.description,
+        published: entry.published,
+      }));
+
+      setMarketData(formattedData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  function formatDateTime(dateString) {
+    const postDate = new Date(dateString);
+    const currentDate = new Date();
+    const timeDifference = Math.floor((currentDate - postDate) / 1000); // Calculate the time difference in seconds
+  
+    if (timeDifference < 60) {
+      return `${timeDifference} second${timeDifference > 1 ? 's' : ''} ago`;
+    } else if (timeDifference < 3600) {
+      const minutesAgo = Math.floor(timeDifference / 60);
+      return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
+    } else if (timeDifference < 86400) {
+      const hoursAgo = Math.floor(timeDifference / 3600);
+      return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
+    } else {
+      const daysAgo = Math.floor(timeDifference / 86400);
+      return `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+    }
+  }
+  
 
   useEffect(() => {
-    const today = new Date();
-    const formattedDate = format(today, "EEEE, MMMM dd, yyyy"); // Format the date
-    setCurrentDate(formattedDate);
+    // Initial fetch when the component mounts
+    fetchData();
+
+    // Set an interval to fetch data every 6 hours (in milliseconds)
+    const intervalId = setInterval(fetchData, 6 * 60 * 60 * 1000);
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -31,131 +90,34 @@ const Markets = () => {
           </h3>
           <Carousel
             showThumbs={false}
-            autoPlay
-            infiniteLoop
-            interval={5000}
+            // autoPlay
+            // infiniteLoop
+            // interval={5000}
             showArrows={false}
             showStatus={false}
-            // showIndicators={false}
             className="h-full"
           >
-            <Link
-              href="https://businessday.ng/companies/article/uba-zenith-gtco-lead-nigerias-7-most-profitable-firms/"
-              target="_blank"
-            >
-              <div className="font-lato">
-                <Image
-                  src="https://res.cloudinary.com/juadeb/image/upload/v1696815311/BDFX/nigerian-banks_hizkxd.webp"
-                  width={636}
-                  height={305}
-                  alt="Markets"
-                />
-                <h2 className="font-roboto text-3xl font-extrabold text-start leading-tight mt-3">
-                  UBA, Zenith, GTCO lead Nigeria’s 7 most profitable firms
-                </h2>
-                <small className="flex items-start justify-start gap-8 mt-1">
-                  <span className="font-roboto text-[12px]">
-                    Eniola Olatunji{" "}
-                  </span>
-                  <span className="font-roboto text-[12px] italic">
-                    {currentDate}
-                  </span>
-                </small>
-                <p className="text-base text-start">
-                  Five banks, a cement maker and a telecommunication company
-                  were among Nigeria’s seven most profitable publicly-listed
-                  companies in the first...
-                </p>
-              </div>
-            </Link>
-            <Link
-              href="https://businessday.ng/uncategorized/article/imf-teaches-central-banks-on-managing-inflation-expectations/"
-              target="_blank"
-            >
-              <div className="font-lato">
-                <Image
-                  src="https://res.cloudinary.com/juadeb/image/upload/v1696815311/BDFX/IMF-1_d75lbm.webp"
-                  width={636}
-                  height={305}
-                  alt="Markets"
-                />
-                <h2 className="font-roboto text-3xl font-extrabold text-start leading-tight mt-3">
-                  IMF teaches Central Banks on managing inflation expectations
-                </h2>
-                <small className="flex items-start justify-start gap-8 mt-1">
-                  <span className="font-roboto text-[12px]">
-                    Hope Moses-Ashike
-                  </span>
-                  <span className="font-roboto text-[12px] italic">
-                    {currentDate}
-                  </span>
-                </small>
-                <p className="text-base text-start">
-                  In its recent report, the International Monetary Fund (IMF)
-                  exposed Central Banks on how managing inflation expectations
-                  can help economies achieve a softer landing...
-                </p>
-              </div>
-            </Link>
-            <Link
-              href="https://businessday.ng/markets/article/stocks-gain-n179bn-in-week-ended-october-6/"
-              target="_blank"
-            >
-              <div className="font-lato">
-                <Image
-                  src="https://res.cloudinary.com/juadeb/image/upload/v1696815600/BDFX/stock-market-1_zt8dkk.webp"
-                  width={636}
-                  height={305}
-                  alt="Markets"
-                />
-                <h2 className="font-roboto text-3xl font-extrabold text-start leading-tight mt-3">
-                  Stocks gain N179bn in week ended October 6
-                </h2>
-                <small className="flex items-start justify-start gap-8 mt-1">
-                  <span className="font-roboto text-[12px]">
-                    Iheanyi Nwachukwu
-                  </span>
-                  <span className="font-roboto text-[12px] italic">
-                    {currentDate}
-                  </span>
-                </small>
-                <p className="text-base text-start">
-                  In the trading week ended Friday October 6, Nigeria’s equities
-                  market rose by 0.11percent while investors booked N179billion
-                  gain...
-                </p>
-              </div>
-            </Link>
-            <Link
-              href="https://businessday.ng/markets/article/first-naira-denominated-infrastructure-fund-lists-on-ngx/"
-              target="_blank"
-            >
-              <div className="font-lato">
-                <Image
-                  src="https://res.cloudinary.com/juadeb/image/upload/v1696815311/BDFX/NGX._kjeua5.webp"
-                  width={636}
-                  height={305}
-                  alt="Markets"
-                />
-                <h2 className="font-roboto text-3xl font-extrabold text-start leading-tight mt-3">
-                  First naira denominated infrastructure fund lists on NGX
-                </h2>
-                <small className="flex items-start justify-start gap-8 mt-1">
-                  <span className="font-roboto text-[12px]">
-                    Iheanyi Nwachukwu
-                  </span>
-                  <span className="font-roboto text-[12px] italic">
-                    {currentDate}
-                  </span>
-                </small>
-                <p className="text-base text-start">
-                  The first local currency-denominated infrastructure investment
-                  trust fund in Nigeria and Sub-Saharan Africa, Nigeria
-                  Infrastructure Debt Fund (NIBF) has been listed on Nigerian
-                  Exchange Limited (NGX).
-                </p>
-              </div>
-            </Link>
+            {marketData.map((item) => (
+              <Link key={item.id} href={item.link} target="_blank">
+                <div className="font-lato">
+                  <Image
+                    src={item.image}
+                    width={636}
+                    height={305}
+                    alt="Markets"
+                  />
+                  <h2 className="font-roboto text-3xl font-extrabold text-start leading-tight mt-3">
+                    {item.title}
+                  </h2>
+                  <small className="flex items-start justify-start gap-8 mt-1">
+                    <span className="font-roboto text-[12px] italic">
+                      {formatDateTime(item.published)}
+                    </span>
+                  </small>
+                  <p className="text-base text-start">{item.description}</p>
+                </div>
+              </Link>
+            ))}
           </Carousel>
         </div>
         <div className="w-full sm:w-[35%]">
@@ -164,65 +126,7 @@ const Markets = () => {
               Recent News
             </span>
           </h3>
-
-          <div className="text-start border-l-4 border-gray-300 hover:border-[#F91212] duration-150 transition-all ease-linear px-5 mb-4">
-            <Link
-              href="https://businessday.ng/category/markets/"
-              target="_blank"
-            >
-              <p className="text-lato font-semibold">
-                Read More Market News to get attuned with current news about the
-                current financials states
-              </p>
-              <small>Just Now</small>
-            </Link>
-          </div>
-          <div className="text-start border-l-4 border-gray-300 hover:border-[#F91212] duration-150 transition-all ease-linear px-5 mb-4">
-            <Link
-              href="https://businessday.ng/news/article/naira-faces-further-weakness-amid-dollar-shortage-fitch-says/"
-              target="_blank"
-            >
-              <p className="text-lato font-semibold">
-                Naira faces further weakness amid dollar shortage, Fitch says
-              </p>
-              <small>{currentDate}</small>
-            </Link>
-          </div>
-          <div className="text-start border-l-4 border-gray-300 hover:border-[#F91212] duration-150 transition-all ease-linear px-5 mb-4">
-            <Link
-              href="https://businessday.ng/markets/article/netherlands-tops-nigerias-export-destination-in-q2/"
-              target="_blank"
-            >
-              <p className="text-lato font-semibold">
-                Netherlands tops Nigeria’s export destination in Q2
-              </p>
-              <small>{currentDate}</small>
-            </Link>
-          </div>
-          <div className="text-start border-l-4 border-gray-300 hover:border-[#F91212] duration-150 transition-all ease-linear px-5 mb-4">
-            <Link
-              href="https://businessday.ng/markets/article/lagos-leads-league-of-outperformers-in-nigerias-socioeconomic-scorecard/"
-              target="_blank"
-            >
-              <p className="text-lato font-semibold">
-                Lagos leads league of outperformers in Nigeria’s socioeconomic
-                scorecard
-              </p>
-              <small>October 4, 2023</small>
-            </Link>
-          </div>
-          <div className="text-start border-l-4 border-gray-300 hover:border-[#F91212] duration-150 transition-all ease-linear px-5 mb-4">
-            <Link
-              href="https://businessday.ng/companies/article/dangote-lafarge-bua-post-highest-profit-margins-among-global-peers-2/"
-              target="_blank"
-            >
-              <p className="text-lato font-semibold">
-                Dangote, Lafarge, BUA post highest profit margins among global
-                peers
-              </p>
-              <small>October 9, 2023</small>
-            </Link>
-          </div>
+          {/* Render your recent news items here */}
         </div>
       </div>
     </section>

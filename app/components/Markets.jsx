@@ -167,8 +167,13 @@ const Markets = () => {
           </h3>
           {newData.map((item) => (
             <div key={item.id}>
-              <a href={item.link} target="_blank" rel="noopener noreferrer">
-                <h3 className="text-2xl font-extrabold text-start leading-tight mt-3">
+              <Link
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mb-10"
+              >
+                <h3 className="text-xl font-extrabold text-start leading-tight mt-3">
                   {item.title}
                 </h3>
                 <small className="flex items-start justify-start gap-8 mt-1">
@@ -176,7 +181,7 @@ const Markets = () => {
                     {formatDateTime(item.published)}
                   </span>
                 </small>
-              </a>
+              </Link>
             </div>
           ))}
         </div>

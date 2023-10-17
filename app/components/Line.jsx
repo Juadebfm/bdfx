@@ -45,7 +45,7 @@ function LineChart() {
     };
 
     // Construct the URL
-    const url = `https://currency-conversion-and-exchange-rates.p.rapidapi.com/timeseries?start_date=${start_date}&end_date=${end_date}&from=${from}&to=${to}`
+    const url = `https://currency-conversion-and-exchange-rates.p.rapidapi.com/timeseries?start_date=${start_date}&end_date=${end_date}&from=${from}&to=${to}`;
     // Make the API request
     fetch(url, { method: "GET", headers })
       .then((response) => response.json())
@@ -57,7 +57,7 @@ function LineChart() {
         const labels = Object.keys(data.rates);
         labels.sort((a, b) => new Date(a) - new Date(b)); // Sort labels in ascending order
 
-        const selectedCurrency = "USD"; // Example: You can change this to any currency from 'to'
+        const selectedCurrency = "NGN"; // Example: You can change this to any currency from 'to'
         const ngntoSelectedCurrency = labels.map(
           (date) => data.rates[date][selectedCurrency]
         );
@@ -73,7 +73,7 @@ function LineChart() {
           labels: formattedLabels, // Use the formatted date labels
           datasets: [
             {
-              label: `NGN to ${selectedCurrency}`,
+              label: `EUR to ${selectedCurrency}`,
               data: ngntoSelectedCurrency,
               borderColor: "black",
               borderWidth: 3,
@@ -88,16 +88,6 @@ function LineChart() {
       });
   }, []);
 
-  // Function to generate random colors
-  function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-
   const options = {
     plugins: {
       legend: true,
@@ -110,13 +100,13 @@ function LineChart() {
             size: 14,
             weight: "300",
           },
-          stepSize: 0.02, // Increase the step size to adjust the scale intervals
+          stepSize: 1, // Increase the step size to adjust the scale intervals
           beginAtZero: false, // Set this to false to start the scale from the minimum data value
-          max: 1.14, // Set the maximum value to 1.14 to provide some space at the top
+          max: 900, // Set the maximum value to 1.14 to provide some space at the top
         },
         title: {
           display: true,
-          text: "Exchange Rate",
+          text: "Exchange Rate In NGN",
           padding: {
             bottom: 10,
           },
@@ -126,7 +116,7 @@ function LineChart() {
             family: "Sans-serif",
           },
         },
-        min: 1.04, // Set the minimum value to 1.04
+        min: 780, // Set the minimum value to 1.04
       },
       x: {
         ticks: {

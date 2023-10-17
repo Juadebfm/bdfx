@@ -4,7 +4,7 @@ import Line from "./Line";
 
 const MySwiper = () => {
   return (
-    <div className="mt-14 px-5 sm:px-0 sm:mt-8 w-full sm:w-[80%] m-auto h-max text-white">
+    <div className="mt-14 px-5 sm:px-0 sm:mt-8 w-full sm:w-[80%] m-auto h-max  text-white">
       <Carousel
         showThumbs={false}
         // autoPlay
@@ -13,7 +13,7 @@ const MySwiper = () => {
         showArrows={false}
         showStatus={false}
       >
-        <div className="h-max w-[100%]">
+        <div className="h-max w-[100%] pb-10">
           <Line />
         </div>
         <div className="h-max w-[100%]">

@@ -154,7 +154,7 @@ function LineChart() {
   return (
     <div>
       <h1 className="font-bold text-3xl text-black text-center">
-        Exchange Rates (Months)
+        Exchange Rates For Popular Currencies
       </h1>
       <div
         style={{

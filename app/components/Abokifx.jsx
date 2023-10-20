@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const AbokifxData = () => {
   const [data, setData] = useState(null);
-  const token = "92d2eaf8d52d65afd451f17ecd8816c0a6605f3a"; // Your authorization token
+  const token = process.env.NEXT_PUBLIC_ABOKI_KEY; // Your authorization token
 
   useEffect(() => {
     // Function to fetch data from the API

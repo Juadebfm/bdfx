@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const AbokifxRates = () => {
   const [ratesData, setRatesData] = useState(null);
-  const token = "92d2eaf8d52d65afd451f17ecd8816c0a6605f3a"; // Replace with your actual authorization token
+  const token = process.env.NEXT_PUBLIC_ABOKI_KEY; // Your authorization token
 
   useEffect(() => {
     // Define the API URL

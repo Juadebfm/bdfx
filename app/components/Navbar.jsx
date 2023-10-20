@@ -10,50 +10,10 @@ import { motion } from "framer-motion";
 const logoImg =
   "https://res.cloudinary.com/juadeb/image/upload/v1696431204/BDFX/bdfx_fx_tts8nv.png";
 
-function fetchData(apiKey) {
-  const apiUrl = `https://api.currencybeacon.com/v1/latest?api_key=${apiKey}`;
-
-  return fetch(apiUrl).then((response) => {
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return response.json();
-  });
-}
-
-// New API configuration
-const conversionUrl =
-  "https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency";
-const conversionOptions = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "212eb6b3ddmsh09b08aa0756630cp1bad60jsnb17f34b14dea",
-    "X-RapidAPI-Host": "currency-converter-by-api-ninjas.p.rapidapi.com",
-  },
-};
-
-const currenciesToCompare = [
-  "AED",
-  "AUD",
-  "CAD",
-  "CNY",
-  "EUR",
-  "GBP",
-  "GHS",
-  "USD",
-  "XAF",
-  "XOF",
-  "ZAR",
-];
-const baseCurrency = "NGN"; // Set NGN as the base currency
-
 const Navbar = () => {
   const pathname = usePathname();
   const [currentDate, setCurrentDate] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [data, setData] = useState(null); // Initialize data state as null
-  const [convertedRates, setConvertedRates] = useState([]);
-  const [formattedRates, setFormattedRates] = useState([]);
 
   const navMenuRef = useRef(null); // Create a reference to the navigation menu
 
@@ -77,22 +37,6 @@ const Navbar = () => {
     };
   }, []);
 
-  // Define your API key here
-  const apiKey = "BntwBy7KMtxjffTe21o6I2ESYMNZBcGP"; // Replace with your actual API key
-
-  useEffect(() => {
-    // Fetch data when the component mounts
-    fetchData(apiKey)
-      .then((result) => {
-        setData(result);
-        // Call function to convert rates when data is fetched
-        convertRates(result.rates);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, [apiKey]); // Include apiKey in the dependency array
-
   useEffect(() => {
     const today = new Date();
     const formattedDate = format(today, "EEEE, MMMM dd, yyyy"); // Format the date
@@ -111,54 +55,6 @@ const Navbar = () => {
       document.body.style.overflow = "auto"; // Allow scrolling
     }
   }, [isMobileMenuOpen]);
-
-  const formatConversionData = (data) => {
-    return (
-      <div>
-        <div>
-          {data.old_currency}/{data.new_currency} = {data.new_amount}
-        </div>
-      </div>
-    );
-  };
-
-  const convertRates = async () => {
-    try {
-      const lastFetchTime = localStorage.getItem("lastFetchTime");
-      const currentTime = new Date().getTime();
-
-      if (
-        !lastFetchTime ||
-        currentTime - parseInt(lastFetchTime, 10) >= 24 * 60 * 60 * 1000
-      ) {
-        const formattedRatesData = await Promise.all(
-          currenciesToCompare.map(async (currency) => {
-            const url = `${conversionUrl}?have=${currency}&want=${baseCurrency}&amount=1`;
-            const response = await fetch(url, conversionOptions);
-            const result = await response.json();
-            return formatConversionData(result);
-          })
-        );
-
-        // Set the state with the formatted conversion rates
-        setFormattedRates(formattedRatesData);
-
-        // Save the converted rates in local storage
-        localStorage.setItem(
-          "convertedRates",
-          JSON.stringify(formattedRatesData)
-        );
-        localStorage.setItem("lastFetchTime", currentTime.toString());
-      }
-    } catch (error) {
-      console.error("Error converting rates:", error);
-    }
-  };
-
-  // Check if an API call is needed when the component mounts
-  useEffect(() => {
-    convertRates(); // Always try to fetch rates when the component mounts
-  }, []);
 
   return (
     <header className="w-full">
@@ -195,20 +91,7 @@ const Navbar = () => {
                   repeat: Infinity,
                   repeatType: "loop",
                 }} // Set animation duration and loop
-              >
-                {convertedRates &&
-                  convertedRates.map((rate, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-center gap-10"
-                    >
-                      <div className="mr-8">
-                        {rate.old_currency}/{rate.new_currency} ={" "}
-                        {rate.new_amount}
-                      </div>
-                    </div>
-                  ))}
-              </motion.div>
+              ></motion.div>
             </div>
           </div>
           <ul

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import format from "date-fns/format";
 import Link from "next/link";
 import { BiMenu, BiX } from "react-icons/bi";
@@ -54,6 +54,28 @@ const Navbar = () => {
   const [data, setData] = useState(null); // Initialize data state as null
   const [convertedRates, setConvertedRates] = useState([]);
   const [formattedRates, setFormattedRates] = useState([]);
+
+  const navMenuRef = useRef(null); // Create a reference to the navigation menu
+
+  const scrollThreshold = 200; // Adjust the threshold as needed (in pixels)
+
+  const handleScroll = () => {
+    if (window.scrollY > scrollThreshold) {
+      // When the user has scrolled down beyond the threshold
+      navMenuRef.current.style.position = "fixed";
+      navMenuRef.current.style.top = "0";
+    } else {
+      // When the user is above the thr3shold
+      navMenuRef.current.style.position = "static"; // or "relative" if you prefer
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // Define your API key here
   const apiKey = "BntwBy7KMtxjffTe21o6I2ESYMNZBcGP"; // Replace with your actual API key
@@ -158,7 +180,7 @@ const Navbar = () => {
               <span className="h-[20px] w-[1px] bg-black"></span>
               <span className="uppercase font-bold">Informing Decisions</span>
             </div>
-            <p className="hidden sm:block">
+            <p className="hidden sm:block md:text-center">
               Business day is a leader in financial and forex business news,
               insight and informed commentary plus all that matters in the
               financial affairs of West Africa
@@ -189,35 +211,62 @@ const Navbar = () => {
               </motion.div>
             </div>
           </div>
-          <ul className="hidden sm:flex font-lato text-base items-center justify-center gap-12 py-4 uppercase border border-b border-gray-200">
+          <ul
+            ref={navMenuRef} // Attach the reference to the ul element
+            className="hidden sm:flex font-lato font-bold text-[14px] items-center justify-center gap-12 py-5 capitalize border border-b border-gray-200 bg-white fixed top-0 left-0 right-0 z-[999]"
+          >
             <Link
               href="/"
-              className={pathname == "/" ? "active_class" : ""}
+              className={
+                pathname == "/"
+                  ? "active_class"
+                  : "hover:text-slate-600 duration-200 transition-all ease-linear"
+              }
               passHref
             >
               Rates
             </Link>
             <Link
-              href="/businessnews"
-              className={pathname == "/businessnews" ? "active_class" : ""}
+              href="https://businessday.ng/"
               passHref
+              className={
+                pathname == "https://businessday.ng/"
+                  ? "active_class"
+                  : "hover:text-slate-600 duration-200 transition-all ease-linear"
+              }
             >
               Business News
             </Link>
             <Link
               href="/analytics"
-              className={pathname == "/analytics" ? "active_class" : ""}
+              className={
+                pathname == "/analytics"
+                  ? "active_class"
+                  : "hover:text-slate-600 duration-200 transition-all ease-linear"
+              }
               passHref
             >
               Analytics
             </Link>
-            <Link href="https://conferences.businessday.ng/" passHref>
+            <Link
+              href="https://conferences.businessday.ng/"
+              passHref
+              className={
+                pathname == "https://conferences.businessday.ng/"
+                  ? "active_class"
+                  : "hover:text-slate-600 duration-200 transition-all ease-linear"
+              }
+            >
               BD Conferences
             </Link>
 
             <Link
               href="/contact"
-              className={pathname == "/contact" ? "active_class" : ""}
+              className={
+                pathname == "/contact"
+                  ? "active_class"
+                  : "hover:text-slate-600 duration-200 transition-all ease-linear"
+              }
               passHref
             >
               Contact
@@ -233,7 +282,7 @@ const Navbar = () => {
         id="mobile_nav"
         className={`${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } absolute z-[999] top-[44.5px] px-10 flex flex-col bg-black border-t-4 border-red-600 text-white w-1/2 h-[100vh] transition-transform duration-300 ease-in-out transform`}
+        } absolute z-[999] top-[44.5px] px-10 flex flex-col bg-black border-t-4 border-red-600 text-white w-1/2 h-[100vh] transition-transform duration-200 ease-in-out transform`}
       >
         <Image
           src={logoImg}
@@ -246,7 +295,11 @@ const Navbar = () => {
           <Link className="border-b border-gray-800 pb-4" href="/">
             Rates
           </Link>
-          <Link className="border-b border-gray-800 pb-4" href="/businessnews">
+          <Link
+            className="border-b border-gray-800 pb-4"
+            href="https://businessday.ng/"
+            target="_blank"
+          >
             Business News
           </Link>
           <Link className="border-b border-gray-800 pb-4" href="/analytics">

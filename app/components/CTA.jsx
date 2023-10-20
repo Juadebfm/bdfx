@@ -4,7 +4,7 @@ import React from "react";
 const CTA = () => {
   return (
     <section
-      className="mt-14 sm:mt-32 w-full sm:w-[100%] px-5 sm:px-0 m-auto relative bg-cover bg-center h-[70vh] sm:h-[50vh]"
+      className="mt-14 w-full sm:w-[100%] px-5 sm:px-0 m-auto relative bg-cover bg-center h-[70vh]"
       style={{
         backgroundImage:
           'url("https://res.cloudinary.com/juadeb/image/upload/v1696822116/BDFX/news_mah8zg.png")',

@@ -51,8 +51,18 @@ const CurrentRates = () => {
   const getLast5Dates = (data) => {
     const dates = Object.keys(data);
     const sortedDates = dates.sort((a, b) => new Date(b) - new Date(a)); // Sort in descending order
-    const last5Dates = sortedDates.slice(0, 5); // Get the first 5 dates
-    return last5Dates;
+    const uniqueDates = new Set(); // To store unique dates
+    const last10UniqueDates = sortedDates
+      .filter((date) => {
+        if (!uniqueDates.has(date)) {
+          uniqueDates.add(date);
+          return true;
+        }
+        return false;
+      })
+      .slice(0, 10);
+
+    return last10UniqueDates;
   };
 
   // Function to get all unique currency names from the data
@@ -69,18 +79,23 @@ const CurrentRates = () => {
   };
 
   return (
-    <section className="w-[100%] mt-14" style={{ height: "400px", overflowY: "auto" }}>
-      <h2 className="font-bold text-[28px] font-lato leading-tight">
-        Lagos Parallel Rates (Other Currencies)
-      </h2>
+    <section
+      className="w-[100%] mt-14"
+      style={{ height: "400px", overflowY: "auto" }}
+    >
+      <div className="mb-4">
+        <h2 className="font-bold text-[28px] font-lato leading-tight">
+          Parallel Rates (Others)
+        </h2>
+      </div>
 
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <table>
-          <thead>
+        <table className="w-full mt-3">
+          <thead className="table-header-group">
             <tr>
-              <th className="flex items-center justify-center gap-5 mt-2">
+              <th className="flex items-center justify-center gap-5 mt-2 mb-4">
                 <Image
                   src="https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_Nigeria.svg"
                   width={50}
@@ -90,7 +105,7 @@ const CurrentRates = () => {
                 <span>NGN</span>
               </th>
               {getUniqueCurrencyNames(apiData).map((currencyName) => (
-                <th key={currencyName}>
+                <th key={currencyName} className="mb-4">
                   <div className="flex items-center justify-center gap-5">
                     {currencyName === "USD" && (
                       <Image
@@ -124,14 +139,22 @@ const CurrentRates = () => {
           </thead>
           <tbody>
             {getLast5Dates(apiData).map((date) => (
-              <tr key={date}>
+              <tr
+                key={date}
+                className="text-center"
+                style={{ border: "1px solid #ccc" }}
+              >
                 <td>{formatDate(date)}</td>
                 {getUniqueCurrencyNames(apiData).map((currencyName) => {
                   const currencyRate = apiData[date].find(
                     (item) => item.currency_name === currencyName
                   );
                   return (
-                    <td key={currencyName}>
+                    <td
+                      key={currencyName}
+                      className="py-1"
+                      style={{ border: "1px solid #ccc" }}
+                    >
                       {currencyRate ? currencyRate.currency_rate : "N/A"}
                     </td>
                   );

@@ -86,7 +86,7 @@ const LagosParallel = () => {
     >
       <div className="mb-4">
         <h2 className="font-bold text-[28px] font-lato leading-tight">
-          Lagos Parallel Rates (USD, EUR, GBP)
+          Parallel Rates (USD, EUR, GBP)
         </h2>
         <small className="text-[#3c9c3c] font-bold">Quotes: *morning **midday ***evening</small>
       </div>
@@ -142,8 +142,7 @@ const LagosParallel = () => {
             {getLast5Dates(apiData).map((date) => (
               <tr
                 key={date}
-                className="text-center"
-                style={{ border: "1px solid #ccc" }}
+                c
               >
                 <td>{formatDate(date)}</td>
                 {getUniqueCurrencyNames(apiData).map((currencyName) => {

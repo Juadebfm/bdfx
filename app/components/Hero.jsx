@@ -7,10 +7,10 @@ import CurrentRates from "./CurrentRates";
 
 const Hero = () => {
   return (
-    <section className="m-auto">
-      <div className="flex items-center justify-between">
-        <LagosParallel className=""/>
-        <CurrentRates className=""/>
+    <section className="m-auto w-[90%]">
+      <div className="grid grid-cols-2 place-items-center w-[100%] mt-8">
+        <LagosParallel/>
+        <CurrentRates/>
       </div>
       <CurrencyConverter />
       <CTA />

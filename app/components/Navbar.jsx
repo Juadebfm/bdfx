@@ -165,7 +165,7 @@ const Navbar = () => {
               src={logoImg}
               width={200}
               height={200}
-              alt="Logo Image"
+              alt="Logo"
               className="self-start m-auto mb-0 sm:mb-2"
             />
             <div className="hidden sm:flex items-center justify-center gap-2 tracking-wide">

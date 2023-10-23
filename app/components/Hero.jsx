@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import CurrencyConverter from "./CurrencyConverter";
-import CTA from "./CTA";
 import LagosParallel from "./LagosParallel";
 import CurrentRates from "./CurrentRates";
 import MarketNews from "./MarketNews";
@@ -20,7 +19,6 @@ const Hero = () => {
       </div>
 
       <CurrencyConverter />
-      <CTA />
     </section>
   );
 };

@@ -38,6 +38,12 @@
   grid-template-columns: 75% 22%;
   gap: 3%;
  }
+
+ @media (max-width: 768px) { 
+  .hero_grid {
+    grid-template-columns: 100%;
+  }
+  }
 @layer components {
   .active_class {
     text-decoration: underline;

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 const CurrentRates = () => {
@@ -79,12 +78,9 @@ const CurrentRates = () => {
   };
 
   return (
-    <section
-      className="w-[100%] mt-14"
-      style={{ height: "400px", overflowY: "auto" }}
-    >
+    <section className="px-0 sm:px-4 mt-5 sm:mt-0 overflow-auto h-[500px] w-[100%]">
       <div className="mb-4">
-        <h2 className="font-bold text-[28px] font-lato leading-tight">
+        <h2 className="font-bold text-[26px] sm:text-[28px] font-lato leading-tight">
           Parallel Rates (Others)
         </h2>
       </div>
@@ -93,20 +89,19 @@ const CurrentRates = () => {
         <p>Loading...</p>
       ) : (
         <table className="w-full mt-3">
-          <thead className="table-header-group">
+          <thead className="table-header-group text-sm sm:text-base">
             <tr>
-              <th className="flex items-center justify-center gap-5 mt-2 mb-4">
-                <Image
+              <th className="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-5 mt-2 mb-4">
+                <img
                   src="https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_Nigeria.svg"
-                  width={50}
-                  height={50}
+                  className="w-5 h-5 sm:w-[40px] sm:h-[40px] mt-2"
                   alt="NGN"
                 />
-                <span>NGN</span>
+                <span className="mt-0 sm:mt-2">NGN</span>
               </th>
               {getUniqueCurrencyNames(apiData).map((currencyName) => (
                 <th key={currencyName} className="mb-4">
-                  <div className="flex items-center justify-center gap-5">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-5">
                     {currencyName === "USD" && (
                       <Image
                         src="https://res.cloudinary.com/juadeb/image/upload/v1698037093/BDFX/icons8-usa-48_vjpnbg.png"
@@ -141,7 +136,7 @@ const CurrentRates = () => {
             {getLast5Dates(apiData).map((date) => (
               <tr
                 key={date}
-                className="text-center"
+                className="text-center text-sm sm:text-base"
                 style={{ border: "1px solid #ccc" }}
               >
                 <td>{formatDate(date)}</td>
@@ -152,10 +147,12 @@ const CurrentRates = () => {
                   return (
                     <td
                       key={currencyName}
-                      className="py-1"
+                      className="py-2 sm:py-1"
                       style={{ border: "1px solid #ccc" }}
                     >
-                      {currencyRate ? currencyRate.currency_rate : "N/A"}
+                      {currencyRate && currencyRate.currency_rate !== "N/A"
+                        ? currencyRate.currency_rate
+                        : "-"}{" "}
                     </td>
                   );
                 })}

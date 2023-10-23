@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 const LagosParallel = () => {
@@ -80,55 +79,50 @@ const LagosParallel = () => {
   };
 
   return (
-    <section
-      className="w-[100%] px-4"
-      style={{ height: "400px", overflowY: "auto" }}
-    >
+    <section className="px-0 sm:px-4 mt-5 sm:mt-0 overflow-auto h-[500px] w-[100%]">
       <div className="mb-4">
-        <h2 className="font-bold text-[28px] font-lato leading-tight">
+        <h2 className="font-bold text-[26px] sm:text-[28px] font-lato leading-tight">
           Parallel Rates (USD, EUR, GBP)
         </h2>
-        <small className="text-[#3c9c3c] font-bold">Quotes: *morning **midday ***evening</small>
+        <small className="text-[#3c9c3c] font-bold">
+          Quotes: *morning **midday ***evening
+        </small>
       </div>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <table className="w-full mt-3">
-          <thead className="table-header-group">
+          <thead className="table-header-group text-sm sm:text-base">
             <tr>
-              <th className="flex items-center justify-center gap-5 mt-2 mb-4">
-                <Image
+              <th className="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-5 mt-2 mb-4">
+                <img
                   src="https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_Nigeria.svg"
-                  width={50}
-                  height={50}
+                  className="w-5 h-5 sm:w-[40px] sm:h-[40px] mt-2"
                   alt="NGN"
                 />
-                <span>NGN</span>
+                <span className="mt-0 sm:mt-2">NGN</span>
               </th>
               {getUniqueCurrencyNames(apiData).map((currencyName) => (
                 <th key={currencyName} className="mb-4">
-                  <div className="flex items-center justify-center gap-5">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-5">
                     {currencyName === "USD" && (
-                      <Image
+                      <img
                         src="https://res.cloudinary.com/juadeb/image/upload/v1698037093/BDFX/icons8-usa-48_vjpnbg.png"
-                        width={40}
-                        height={40}
+                        className="w-5 h-5 sm:w-[40px] sm:h-[40px]"
                         alt={currencyName}
                       />
                     )}
                     {currencyName === "GBP" && (
-                      <Image
+                      <img
                         src="https://res.cloudinary.com/juadeb/image/upload/v1698037081/BDFX/icons8-united-kingdom-48_cafoxp.png"
-                        width={40}
-                        height={40}
+                        className="w-5 h-5 sm:w-[40px] sm:h-[40px]"
                         alt={currencyName}
                       />
                     )}
                     {currencyName === "EUR" && (
-                      <Image
+                      <img
                         src="https://res.cloudinary.com/juadeb/image/upload/v1698037069/BDFX/icons8-europe-48_vchvbf.png"
-                        width={40}
-                        height={40}
+                        className="w-5 h-5 sm:w-[40px] sm:h-[40px]"
                         alt={currencyName}
                       />
                     )}
@@ -142,7 +136,8 @@ const LagosParallel = () => {
             {getLast5Dates(apiData).map((date) => (
               <tr
                 key={date}
-                c
+                className="text-center text-sm sm:text-base"
+                style={{ border: "1px solid #ccc" }}
               >
                 <td>{formatDate(date)}</td>
                 {getUniqueCurrencyNames(apiData).map((currencyName) => {
@@ -152,7 +147,7 @@ const LagosParallel = () => {
                   return (
                     <td
                       key={currencyName}
-                      className="py-1"
+                      className="py-2 sm:py-1"
                       style={{ border: "1px solid #ccc" }}
                     >
                       {currencyRate ? currencyRate.currency_rate : "N/A"}

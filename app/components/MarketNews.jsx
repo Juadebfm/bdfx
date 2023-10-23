@@ -61,8 +61,8 @@ const MarketNews = () => {
   };
 
   return (
-    <div>
-      <h2 className="font-bold text-[28px] font-lato leading-tight">
+    <div className="px-3">
+      <h2 className="font-bold text-[28px] font-lato leading-tight border-b-[2px] mb-2 border-gray-300 pb-2">
         Market News
       </h2>
       <div>
@@ -83,7 +83,7 @@ const MarketNews = () => {
           </div>
         )}
       </div>
-      <Abokifxnews />
+      {/* <Abokifxnews /> */}
     </div>
   );
 };

@@ -32,6 +32,11 @@
   white-space: nowrap;
 }
 
+.hero_grid
+ {
+  display: grid;
+  grid-template-columns: 70% 30%;
+ }
 @layer components {
   .active_class {
     text-decoration: underline;

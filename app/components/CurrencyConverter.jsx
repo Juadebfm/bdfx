@@ -149,7 +149,7 @@ const CurrencyConverter = () => {
   }
 
   return (
-    <section className="mt-14 sm:mt-32 w-full sm:w-[80%] md:w-[100%] lg:w-[80%] px-5 sm:px-0 m-auto text-center">
+    <section className="mt-14 sm:mt-12 w-full sm:w-[80%] md:w-[100%] lg:w-[80%] px-5 sm:px-0 m-auto text-center">
       <h1 className="font-bold text-[42px] font-lato leading-tight">
         Currency Converter
       </h1>

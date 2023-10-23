@@ -10,6 +10,93 @@ import { motion } from "framer-motion";
 const logoImg =
   "https://res.cloudinary.com/juadeb/image/upload/v1696431204/BDFX/bdfx_fx_tts8nv.png";
 
+// List of currencies separated by commas
+const currencies =
+  "AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB,BRL, BSD, BTN, BWP, BYN, BZD, CAD, CDF, CHF, CLF, CLP, CNY, COP, CRC, CUC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, EUR, FJD, FKP, GBP, GEL, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, INR, IQD, IRR, ISK, JMD, JOD, JPY, KES, KGS, KHR, KMF, KPW, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LTL, LVL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRO, MUR, MVR, MWK, MXN, MYR, MZN, NAD, NGN, NIO, NOK, NPR, NZD, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SEK, SGD, SHP, SLL, SOS, SRD,STD, SVC, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, USD, UYU, UZS, VEF, VND, VUV, WST, XAF, XCD, XOF, XPF, YER, ZAR, ZMW, ZWL";
+
+// Base currency
+const baseCurrency = "NGN"; // The base currency for conversion
+
+const apiKey = "BntwBy7KMtxjffTe21o6I2ESYMNZBcGP"; // Your API key
+
+// Initialize the currency data array from local storage or as an empty array
+let currencyData = [];
+
+// Function to add a new conversion to the array and update local storage
+const addConversionToData = (fromCurrency, toCurrency, value) => {
+  // Create a new conversion object
+  const newConversion = {
+    from: fromCurrency,
+    to: toCurrency,
+    value: value,
+  };
+
+  // Push the new conversion to the currencyData array
+  currencyData.push(newConversion);
+
+  // Safely update local storage with the updated array
+  if (typeof localStorage !== "undefined") {
+    localStorage.setItem("currencyData", JSON.stringify(currencyData));
+  }
+};
+
+// Function to check if the last API call was made within the last 24 hours
+function isLastApiCallWithin24Hours() {
+  if (typeof localStorage !== "undefined") {
+    const lastApiCallTimestamp = localStorage.getItem("lastApiCallTimestamp");
+
+    if (!lastApiCallTimestamp) {
+      // If there is no previous timestamp, the API call has never been made
+      return false;
+    }
+
+    const currentTime = new Date().getTime();
+    const twentyFourHours = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+    return currentTime - parseInt(lastApiCallTimestamp, 10) < twentyFourHours;
+  }
+
+  return false;
+}
+
+const convertCurrency = async (fromCurrency, toCurrency) => {
+  if (!isLastApiCallWithin24Hours()) {
+    // If the last API call was not within the last 24 hours, make the call
+    const apiUrl = `https://api.currencybeacon.com/v1/convert?from=${toCurrency}&to=${fromCurrency}&amount=1&api_key=${apiKey}`;
+
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      // Step 2: Add the new conversion to the currencyData array and update local storage
+      addConversionToData(fromCurrency, toCurrency, data.value);
+      // Update the last API call timestamp in local storage
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem(
+          "lastApiCallTimestamp",
+          new Date().getTime().toString()
+        );
+      }
+    } catch (error) {
+      console.error(
+        `Error converting ${fromCurrency} to ${toCurrency}:`,
+        error
+      );
+    }
+  }
+};
+
+// Loop through the list of currencies and make API requests
+const currencyList = currencies.split(",");
+const targetCurrency = "NGN"; // Start with NGN as the target currency
+currencyList.forEach(async (currency) => {
+  if (currency !== targetCurrency) {
+    await convertCurrency(baseCurrency, currency);
+  }
+});
+
 const Navbar = () => {
   const pathname = usePathname();
   const [currentDate, setCurrentDate] = useState("");
@@ -56,6 +143,16 @@ const Navbar = () => {
     }
   }, [isMobileMenuOpen]);
 
+  // Load currencyData from local storage at the beginning of the component
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const storedCurrencyData = localStorage.getItem("currencyData");
+      if (storedCurrencyData) {
+        currencyData = JSON.parse(storedCurrencyData);
+      }
+    }
+  }, []);
+
   return (
     <header className="w-full">
       <section className="w-full text-[14px] text-center sm:text-start bg-black text-white px-5 sm:px-32 py-3">
@@ -81,17 +178,34 @@ const Navbar = () => {
               insight and informed commentary plus all that matters in the
               financial affairs of West Africa
             </p>
-            <div className="hidden sm:flex items-center justify-between font-lato text-base h-[40px] w-full mt-2 bg-black text-white">
-              <motion.div
-                className="w-full h-full flex items-center justify-center"
-                initial={{ x: "100%" }} // Start from the right edge of the container
-                animate={{ x: "-100%" }} // Move to the left edge of the container
-                transition={{
-                  duration: 30,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                }} // Set animation duration and loop
-              ></motion.div>
+            <div className="sm:flex items-center justify-between font-lato text-base h-[60px] w-full mt-2 bg-black text-white fixed bottom-0 left-0 right-0 z-[999] sm:static">
+              <div
+                className="w-full h-full flex items-center justify-center marquee"
+                style={{
+                  animation: `marquee ${
+                    currencyData.length * 1
+                  }s linear infinite`, // Adjust the speed based on the number of currencies
+                }}
+              >
+                {currencyData.map((conversion) => (
+                  <span
+                    key={conversion.to}
+                    className="mx-2 flex items-center justify-center w-auto space-x-6"
+                  >
+                    <span className="whitespace-nowrap">
+                      <span style={{ fontWeight: "bold" }}>
+                        NGN/{conversion.to}
+                      </span>{" "}
+                      <span style={{ fontWeight: "bold", color: "orange" }}>
+                        =
+                      </span>{" "}
+                      <span style={{ fontWeight: "bold", color: "red" }}>
+                        {conversion.value.toFixed(2)}
+                      </span>
+                    </span>
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
           <ul

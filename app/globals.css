@@ -15,6 +15,23 @@
   color: white; /* Optional: Set text color to white for better contrast */
 }
 
+/* CSS for the marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(250%);
+  }
+  100% {
+    transform: translateX(-150%);
+  }
+}
+
+/* Style for currency items */
+.currency-item {
+  display: inline-block;
+  padding: 0 20px; /* Adjust the padding as needed */
+  white-space: nowrap;
+}
+
 @layer components {
   .active_class {
     text-decoration: underline;

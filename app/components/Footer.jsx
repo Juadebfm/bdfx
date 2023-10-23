@@ -108,7 +108,7 @@ const Footer = () => {
           </p>
 
           <form className="">
-            <div className="relative font-lato text-base"> 
+            <div className="relative font-lato text-base">
               <input
                 type="search"
                 id="search"
@@ -125,7 +125,7 @@ const Footer = () => {
           </form>
         </div>
       </section>
-      <section className="text-slate-500 text-sm font-lato mt-3 text-center sm:text-start">
+      <section className="text-slate-500 text-sm font-lato mt-3 mb-20 sm:mb-0 text-center sm:text-start">
         <p>© {currentYear} - Businessday NG. All Rights Reserved.</p>
       </section>
     </footer>

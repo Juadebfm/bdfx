@@ -35,7 +35,8 @@
 .hero_grid
  {
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 75% 22%;
+  gap: 3%;
  }
 @layer components {
   .active_class {

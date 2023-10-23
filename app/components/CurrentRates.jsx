@@ -69,7 +69,7 @@ const CurrentRates = () => {
   };
 
   return (
-    <section className="w-[100%] mt-5" style={{ height: "400px", overflowY: "auto" }}>
+    <section className="w-[100%] mt-14" style={{ height: "400px", overflowY: "auto" }}>
       <h2 className="font-bold text-[28px] font-lato leading-tight">
         Lagos Parallel Rates (Other Currencies)
       </h2>

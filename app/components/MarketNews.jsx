@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import Abokifxnews from "./Abokifxnews";
 
 const MarketNews = () => {
   const [feedData, setFeedData] = useState([]);
@@ -64,22 +65,25 @@ const MarketNews = () => {
       <h2 className="font-bold text-[28px] font-lato leading-tight">
         Market News
       </h2>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="mt-2">
-          {feedData.map((item, index) => (
-            <div key={index} className="mb-6">
-              <Link href={item.link} target="_blank">
-                <h3 className="capitalize font-bold leading-none">
-                  {item.title}
-                </h3>
-                <small>{formatTimeAgo(item.publishDateFormatted)}</small>
-              </Link>
-            </div>
-          ))}
-        </div>
-      )}
+      <div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="mt-2">
+            {feedData.map((item, index) => (
+              <div key={index} className="mb-6">
+                <Link href={item.link} target="_blank">
+                  <h3 className="capitalize font-bold leading-none">
+                    {item.title}
+                  </h3>
+                  <small>{formatTimeAgo(item.publishDateFormatted)}</small>
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      <Abokifxnews />
     </div>
   );
 };

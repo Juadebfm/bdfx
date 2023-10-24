@@ -188,11 +188,11 @@ const Navbar = () => {
                 }}
               >
                 {currencyData.map((conversion) => (
-                  <span
+                  <div
                     key={conversion.to}
                     className="mx-2 flex items-center justify-center w-auto space-x-6"
                   >
-                    <span className="whitespace-nowrap">
+                    <div className="whitespace-nowrap">
                       <span style={{ fontWeight: "bold" }}>
                         NGN/{conversion.to}
                       </span>{" "}
@@ -202,8 +202,8 @@ const Navbar = () => {
                       <span style={{ fontWeight: "bold", color: "red" }}>
                         {conversion.value.toFixed(2)}
                       </span>
-                    </span>
-                  </span>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>

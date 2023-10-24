@@ -8,34 +8,55 @@ const MarketNews = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchFeedData = async () => {
-      const url =
-        "https://feed-reader3.p.rapidapi.com/load?url=https%3A%2F%2Fbusinessday.ng%2Fcategory%2Fmarkets%2Ffeed%2F";
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key":
-            "212eb6b3ddmsh09b08aa0756630cp1bad60jsnb17f34b14dea",
-          "X-RapidAPI-Host": "feed-reader3.p.rapidapi.com",
-        },
-      };
+    if (typeof window !== "undefined") {
+      const lastAPICallTimestampForFeeds = localStorage.getItem("lastAPICallTimestampForFeeds");
+      const currentTime = new Date().getTime();
+      const twentyFourHours = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-      try {
-        const response = await fetch(url, options);
-        if (response.ok) {
-          const result = await response.json();
-          setFeedData(result.data);
+      // Check if the last API call is older than 24 hours or doesn't exist
+      if (!lastAPICallTimestampForFeeds || currentTime - lastAPICallTimestampForFeeds > twentyFourHours) {
+        // Proceed with the API call
+        const fetchFeedData = async () => {
+          const url = "https://feed-reader3.p.rapidapi.com/load?url=https%3A%2F%2Fbusinessday.ng%2Fcategory%2Fmarkets%2Ffeed%2F";
+          const options = {
+            method: "GET",
+            headers: {
+              "X-RapidAPI-Key": "212eb6b3ddmsh09b08aa0756630cp1bad60jsnb17f34b14dea",
+              "X-RapidAPI-Host": "feed-reader3.p.rapidapi.com",
+            },
+          };
+
+          try {
+            const response = await fetch(url, options);
+            if (response.ok) {
+              const result = await response.json();
+              setFeedData(result.data);
+              setLoading(false);
+
+              // Update the last API call timestamp in local storage
+              localStorage.setItem("lastAPICallTimestampForFeeds", currentTime);
+
+              // Cache the API response data in local storage
+              localStorage.setItem("cachedFeedData", JSON.stringify(result.data));
+            } else {
+              throw new Error("Network response was not ok");
+            }
+          } catch (error) {
+            console.error(error);
+            setLoading(false);
+          }
+        };
+
+        fetchFeedData();
+      } else {
+        // Use the cached data from local storage if the API call isn't needed
+        const cachedData = localStorage.getItem("cachedFeedData");
+        if (cachedData) {
+          setFeedData(JSON.parse(cachedData));
           setLoading(false);
-        } else {
-          throw new Error("Network response was not ok");
         }
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
       }
-    };
-
-    fetchFeedData();
+    }
   }, []);
 
   // Function to format the time ago

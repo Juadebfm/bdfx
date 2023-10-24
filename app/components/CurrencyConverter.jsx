@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiTransferAlt } from "react-icons/bi";
 import { FaExclamation } from "react-icons/fa6";
 import debounce from "lodash/debounce";
@@ -10,12 +10,57 @@ const CurrencyConverter = () => {
   const [haveCurrency, setHaveCurrency] = useState("NGN");
   const [wantCurrency, setWantCurrency] = useState("AED");
 
+  const [apiData, setApiData] = useState(null);
+
+  const fetchExchangeRate = async () => {
+    try {
+      let apiUrl;
+
+      // Determine the API URL based on selected wantCurrency
+      if (["USD", "GBP", "EUR"].includes(wantCurrency)) {
+        apiUrl = "https://abokifx.com/api/v1/rates/movement";
+      } else {
+        apiUrl = "https://abokifx.com/api/v1/rates/otherparallel";
+      }
+
+      // Define the request headers
+      const headers = {
+        Accept: "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_ABOKI_KEY}`, // Replace with your actual token
+      };
+
+      // Make the API request
+      const response = await fetch(apiUrl, { headers });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      setApiData(data); // Store the response data in state
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (wantCurrency) {
+      fetchExchangeRate();
+    }
+  }, [wantCurrency]);
+
+  useEffect(() => {
+    if (apiData) {
+      console.log("API Data:", apiData);
+      // You can process or use the data as needed here
+    }
+  }, [apiData]);
+
   const secondSelectOptions = [
     "USD",
     "GBP",
     "EUR",
     "CAD",
-    "ZAR",
     "ZAR",
     "AED",
     "CNY",

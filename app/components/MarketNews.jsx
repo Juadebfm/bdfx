@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import Abokifxnews from "./Abokifxnews";
 
 const MarketNews = () => {
   const [feedData, setFeedData] = useState([]);
@@ -104,11 +103,9 @@ const MarketNews = () => {
           </div>
         )}
       </div>
-      {/* <Abokifxnews /> */}
     </div>
   );
 };
 
 export default MarketNews;
 
-// {item.link}

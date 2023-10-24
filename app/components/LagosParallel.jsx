@@ -60,7 +60,7 @@ const LagosParallel = () => {
         }
         return false;
       })
-      .slice(0, 10);
+      .slice(0, 8);
 
     return last10UniqueDates;
   };
@@ -106,7 +106,11 @@ const LagosParallel = () => {
                 <th key={currencyName} className="mb-4">
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-5">
                     {currencyName === "USD" && (
-                      div
+                      <img
+                        src="https://res.cloudinary.com/juadeb/image/upload/v1698037093/BDFX/icons8-usa-48_vjpnbg.png"
+                        className="w-5 h-5 sm:w-[40px] sm:h-[40px]"
+                        alt={currencyName}
+                      />
                     )}
                     {currencyName === "GBP" && (
                       <img
@@ -124,6 +128,7 @@ const LagosParallel = () => {
                     )}
                     <span>{currencyName}</span>
                   </div>
+                  <span className="mt-0 sm:mt-2 !text-[#3c9c3c]">BUY/SELL</span>
                 </th>
               ))}
             </tr>

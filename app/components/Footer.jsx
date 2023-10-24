@@ -34,25 +34,25 @@ const Footer = () => {
               target="_blank"
               href="https://www.facebook.com/businessdayng/"
             >
-              <RiFacebookLine className="border border-slate-500 text-slate-800 rounded-full p-2 h-8 w-8 cursor-pointer hover:bg-black hover:text-white" />
+              <RiFacebookLine className="border border-slate-500 text-slate-800 rounded-full p-2 h-10 w-10 cursor-pointer hover:bg-black hover:text-white" />
             </Link>
             <Link target="_blank" href="https://twitter.com/BusinessDayNg">
-              <RiTwitterXFill className="border border-slate-500 text-slate-800 rounded-full p-2 h-8 w-8 cursor-pointer hover:bg-black hover:text-white" />
+              <RiTwitterXFill className="border border-slate-500 text-slate-800 rounded-full p-2 h-10 w-10 cursor-pointer hover:bg-black hover:text-white" />
             </Link>
             <Link
               target="_blank"
               href="https://www.instagram.com/businessdayng/"
             >
-              <AiOutlineInstagram className="border border-slate-500 text-slate-800 rounded-full p-2 h-8 w-8 cursor-pointer hover:bg-black hover:text-white" />
+              <AiOutlineInstagram className="border border-slate-500 text-slate-800 rounded-full p-2 h-10 w-10 cursor-pointer hover:bg-black hover:text-white" />
             </Link>
             <Link
               target="_blank"
               href="https://www.youtube.com/channel/UCsVZWCV-LutMa89JgR8-KGw"
             >
-              <TfiYoutube className="border border-slate-500 text-slate-800 rounded-full p-2 h-8 w-8 cursor-pointer hover:bg-black hover:text-white" />
+              <TfiYoutube className="border border-slate-500 text-slate-800 rounded-full p-2 h-10 w-10 cursor-pointer hover:bg-black hover:text-white" />
             </Link>
             <Link target="_blank" href="https://t.me/businessday1">
-              <FaTelegram className="border border-slate-500 text-slate-800 rounded-full p-2 h-8 w-8 cursor-pointer hover:bg-black hover:text-white" />
+              <FaTelegram className="border border-slate-500 text-slate-800 rounded-full p-2 h-10 w-10 cursor-pointer hover:bg-black hover:text-white" />
             </Link>
           </div>
         </div>

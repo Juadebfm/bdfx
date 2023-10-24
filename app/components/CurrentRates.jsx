@@ -78,7 +78,7 @@ const CurrentRates = () => {
   };
 
   return (
-    <section className="px-0 sm:px-4 mt-5 sm:mt-0 overflow-auto h-[500px] w-[100%]">
+    <section className="px-0 sm:px-4 mt-5 sm:mt-3 overflow-auto h-[500px] w-[100%]">
       <div className="mb-4">
         <h2 className="font-bold text-[26px] sm:text-[28px] font-lato leading-tight">
           Parallel Rates (Others)
@@ -91,13 +91,16 @@ const CurrentRates = () => {
         <table className="w-full mt-3">
           <thead className="table-header-group text-sm sm:text-base">
             <tr>
-              <th className="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-5 mt-2 mb-4">
+              <th className="flex flex-col sm:flex-row items-start justify-center gap-0 sm:gap-5 mt-2 mb-4">
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_Nigeria.svg"
                   className="w-5 h-5 sm:w-[40px] sm:h-[40px] mt-2"
                   alt="NGN"
                 />
-                <span className="mt-0 sm:mt-2">NGN</span>
+                <div className="flex flex-col gap-0">
+                  <span className="mt-0 sm:mt-2">NGN</span>
+                  <span className="mt-0">(Dates)</span>
+                </div>
               </th>
               {getUniqueCurrencyNames(apiData).map((currencyName) => (
                 <th key={currencyName} className="mb-4">
@@ -128,6 +131,7 @@ const CurrentRates = () => {
                     )}
                     <span>{currencyName}</span>
                   </div>
+                  <span className="mt-0 sm:mt-2 !text-[#3c9c3c]">BUY/SELL</span>
                 </th>
               ))}
             </tr>

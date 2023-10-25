@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { BiTransferAlt } from "react-icons/bi";
 import { FaExclamation } from "react-icons/fa6";
@@ -11,6 +13,36 @@ const CurrencyConverter = () => {
   const [wantCurrency, setWantCurrency] = useState("AED");
 
   const [apiData, setApiData] = useState(null);
+  const [selectedCurrencyRate, setSelectedCurrencyRate] = useState("");
+
+  const calculateExchangeRate = () => {
+    if (apiData && wantCurrency) {
+      const dates = Object.keys(apiData.response);
+      const mostRecentDate = dates[0];
+      const currencyRate = apiData.response[mostRecentDate].find(
+        (item) => item.currency_name === wantCurrency
+      );
+
+      if (currencyRate) {
+        // Split the exchange rate string by '/' and get the last part
+        const parts = currencyRate.currency_rate.split("/");
+        const lastPart = parts[1].trim();
+
+        // Remove any '*' character if it exists
+        const cleanRate = lastPart.replace("*", "");
+
+        // Format the exchange rate
+        const formattedRate = `1.00 ${wantCurrency} = ${cleanRate} NGN`;
+
+        setSelectedCurrencyRate(formattedRate);
+      }
+    }
+  };
+
+  // Call the function to calculate the exchange rate whenever 'wantCurrency' or 'apiData' changes
+  useEffect(() => {
+    calculateExchangeRate();
+  }, [wantCurrency, apiData]);
 
   const fetchExchangeRate = async () => {
     try {
@@ -135,6 +167,9 @@ const CurrencyConverter = () => {
               {validationMessage}
             </div>
           )}
+          <span className="absolute flex gap-2 items-center -bottom-10 right-0 sm:-bottom-8 font-bold text-sm">
+            {selectedCurrencyRate}
+          </span>
           <div className="flex items-center justify-center border border-black w-full sm:w-0 basis-[100%] sm:basis-[45%] h-[92.98px] py-8 sm:py-0 px-4 mb-5 sm:mb-0">
             <div className="flex flex-col items-start justify-center gap-4 w-full">
               <label htmlFor="Amount" className="font-lato text-[14px]">

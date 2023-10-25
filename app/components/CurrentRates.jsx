@@ -91,13 +91,13 @@ const CurrentRates = () => {
         <table className="w-full mt-3">
           <thead className="table-header-group text-sm sm:text-base">
             <tr>
-              <th className="flex flex-col sm:flex-row items-start justify-center gap-0 sm:gap-5 mt-2 mb-4">
+              <th className="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-5 mt-2 mb-4">
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_Nigeria.svg"
                   className="w-5 h-5 sm:w-[40px] sm:h-[40px] mt-2"
                   alt="NGN"
                 />
-                <div className="flex flex-col gap-0">
+                <div className="flex flex-col items-center justify-center gap-0">
                   <span className="mt-0 sm:mt-2">NGN</span>
                   <span className="mt-0">(Dates)</span>
                 </div>

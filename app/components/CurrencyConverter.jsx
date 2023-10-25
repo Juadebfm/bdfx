@@ -147,7 +147,7 @@ const CurrencyConverter = () => {
   };
 
   return (
-    <section className="mt-14 sm:mt-12 w-full sm:w-[80%] md:w-[100%] lg:w-[80%] px-5 sm:px-0 m-auto text-center">
+    <section className="mt-14 sm:mt-12 w-full sm:w-[90%] md:w-[100%] lg:w-[80%] px-1 sm:px-0 m-auto text-center">
       <h1 className="font-bold text-[26px] sm:text-[30px] font-lato leading-tight">
         Currency Converter
       </h1>
@@ -162,12 +162,12 @@ const CurrencyConverter = () => {
         </small>
         <div className="flex flex-col sm:flex-row items-center justify-between mt-10 relative">
           {validationMessage && (
-            <div className="absolute flex gap-2 items-center -bottom-10 sm:-bottom-8 font-bold text-[#F91212] text-sm">
-              <FaExclamation className="border border-[#F91212] font-bold rounded-full" />
+            <div className="absolute flex gap-2 items-start sm:items-center -bottom-12 sm:-bottom-8 font-bold text-[#F91212] text-sm">
+              <FaExclamation className="border border-[#F91212] font-bold rounded-full mt-[0.20rem]" />
               {validationMessage}
             </div>
           )}
-          <span className="absolute flex gap-2 items-center -bottom-10 right-0 sm:-bottom-8 font-bold text-sm">
+          <span className="absolute flex gap-2 items-center -bottom-20 sm:-bottom-10 sm:right-0 font-bold text-sm">
             {selectedCurrencyRate}
           </span>
           <div className="flex items-center justify-center border border-black w-full sm:w-0 basis-[100%] sm:basis-[45%] h-[92.98px] py-8 sm:py-0 px-4 mb-5 sm:mb-0">
@@ -181,7 +181,7 @@ const CurrencyConverter = () => {
                 placeholder="Amount"
                 value={inputValue1}
                 onChange={handleInputChange1}
-                className="placeholder:font-lato placeholder:text-[14px] font-bold border-0 pl-2 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-full sm:w-auto"
+                className="placeholder:font-lato placeholder:text-[12px] sm:placeholder:text-[14px] font-bold border-0 pl-2 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-full sm:w-auto"
               />
             </div>
             <div className="flex flex-col items-end justify-between gap-4 font-lato text-[14px] w-full">
@@ -213,7 +213,7 @@ const CurrencyConverter = () => {
                   inputValue1 ? `Converting to ${wantCurrency}` : "Amount"
                 }
                 onChange={handleInputChange2}
-                className="placeholder:font-lato placeholder:text-[14px] font-bold border-0 pl-0 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-full sm:w-auto"
+                className="placeholder:font-lato placeholder:text-[12px] sm:placeholder:text-[14px] font-bold border-0 pl-0 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-full sm:w-auto"
                 value={inputValue2}
               />
             </div>
@@ -242,7 +242,7 @@ const CurrencyConverter = () => {
         </div>
         <button
           onClick={handleClear}
-          className="bg-[#F91212] hover-bg-[#F91212]/80 transition-all duration-150 ease-linear text-white w-[300px] h-[50px] text-base rounded-md mt-20"
+          className="bg-[#F91212] hover-bg-[#F91212]/80 transition-all duration-150 ease-linear text-white w-[250px] sm:w-[300px] h-[50px] text-base rounded-md mt-24"
         >
           Clear
         </button>

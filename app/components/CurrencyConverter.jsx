@@ -15,6 +15,8 @@ const CurrencyConverter = () => {
   const [apiData, setApiData] = useState(null);
   const [selectedCurrencyRate, setSelectedCurrencyRate] = useState("");
 
+  const [exchangeRate, setExchangeRate] = useState(null);
+
   const calculateExchangeRate = () => {
     if (apiData && wantCurrency) {
       const dates = Object.keys(apiData.response);
@@ -30,6 +32,9 @@ const CurrencyConverter = () => {
 
         // Remove any '*' character if it exists
         const cleanRate = lastPart.replace("*", "");
+
+        // Set the exchange rate in state
+        setExchangeRate(parseFloat(cleanRate));
 
         // Format the exchange rate
         const formattedRate = `1.00 ${wantCurrency} = ${cleanRate} NGN`;
@@ -88,6 +93,14 @@ const CurrencyConverter = () => {
     }
   }, [apiData]);
 
+  // Add this useEffect to recalculate the converted value when 'wantCurrency' changes
+  useEffect(() => {
+    if (exchangeRate && inputValue1) {
+      const convertedValue = calculateConvertedValue(inputValue1, exchangeRate);
+      setInputValue2(convertedValue);
+    }
+  }, [wantCurrency, exchangeRate]);
+
   const secondSelectOptions = [
     "USD",
     "GBP",
@@ -109,12 +122,11 @@ const CurrencyConverter = () => {
     setHaveCurrency("NGN");
     setValidationMessage("");
 
-    if (!/^\d+$/.test(newValue)) {
-      setValidationMessage(
-        "Please Input a number. Letters & Symbols are Invalid"
-      );
+    if (!/^\d*\.?\d*$/.test(newValue)) {
+      setValidationMessage("Please Input a valid number.");
     } else {
       setValidationMessage("");
+      debouncedInputChange(newValue);
     }
   };
 
@@ -145,6 +157,19 @@ const CurrencyConverter = () => {
     const newValue = event.target.value;
     setWantCurrency(newValue);
   };
+
+  const calculateConvertedValue = (amount, exchangeRate) => {
+    if (!isNaN(amount) && !isNaN(exchangeRate)) {
+      return (amount * exchangeRate).toFixed(2);
+    }
+    return "";
+  };
+
+  // Debounce input changes and perform conversion after 1000ms
+  const debouncedInputChange = debounce((amount) => {
+    const convertedValue = calculateConvertedValue(amount, exchangeRate);
+    setInputValue2(convertedValue);
+  }, 1000);
 
   return (
     <section className="mt-14 sm:mt-12 w-full sm:w-[90%] md:w-[100%] lg:w-[80%] px-1 sm:px-0 m-auto text-center">

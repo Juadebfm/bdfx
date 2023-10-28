@@ -245,7 +245,7 @@ const CurrencyConverter = () => {
             </div>
             <div className="flex flex-col items-end justify-between gap-4 font-lato text-[14px] w-full">
               <label htmlFor="Currency" className="font-lato text-[14px]">
-                Currency
+                In Naira
               </label>
               <select
                 id="firstSelect"

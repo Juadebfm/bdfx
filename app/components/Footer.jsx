@@ -112,12 +112,12 @@ const Footer = () => {
               <input
                 type="search"
                 id="search"
-                className="block w-full p-4 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#f91212] focus:border-[#f91212] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#f91212] dark:focus:border-[#f91212]"
+                className="block w-full p-4 pl-4 text-inherit text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#f91212] focus:border-[#f91212] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#f91212] dark:focus:border-[#f91212]"
                 required
               />
               <button
                 type="submit"
-                className="text-white absolute right-2.5 bottom-[0.55rem] bg-[#f91212] hover:bg-[#f91212] focus:ring-4 focus:outline-none focus:ring-[#f91212] font-medium rounded-full px-4 py-2 dark:bg-[#f91212] dark:hover:bg-[#f91212] dark:focus:ring-[#f91212]"
+                className="bg-[#F91212] hover:bg-[#F91212]/80 transition-all duration-150 ease-linear text-white w-[300px] h-[50px] text-lg rounded-md mt-4"
               >
                 Subscribe
               </button>

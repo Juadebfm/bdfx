@@ -161,13 +161,15 @@ const Navbar = () => {
       <section className="flex items-center justify-between px-3 sm:px-0 w-full mt-2">
         <nav className="py-0 sm:py-4 font-twenty text-[1.4rem] text-gray-800 sm:mx-auto sm:w-full">
           <div className="flex flex-col items-center justify-center border-0 sm:border-b-2 border-black pb-0">
-            <Image
-              src={logoImg}
-              width={200}
-              height={200}
-              alt="Logo"
-              className="self-start m-auto mb-0 sm:mb-2"
-            />
+            <Link href="/">
+              <Image
+                src={logoImg}
+                width={200}
+                height={200}
+                alt="Logo"
+                className="self-start m-auto mb-0 sm:mb-2"
+              />
+            </Link>
             <div className="hidden sm:flex items-center justify-center gap-2 tracking-wide">
               <span className="uppercase font-bold">Tracking Trends</span>
               <span className="h-[20px] w-[1px] bg-black"></span>

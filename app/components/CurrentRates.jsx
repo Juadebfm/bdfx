@@ -80,7 +80,7 @@ const CurrentRates = () => {
   return (
     <section className="px-0 sm:px-4 mt-5 sm:mt-3 overflow-auto h-auto w-[100%]">
       <div className="mb-4">
-        <h2 className="font-bold text-[26px] sm:text-[28px] font-lato leading-tight">
+        <h2 className="font-bold text-[26px] sm:text-[28px] font-lato leading-tight border-b-[2px] border-gray-300 pb-2">
           Parallel Rates (Others)
         </h2>
       </div>

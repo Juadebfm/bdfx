@@ -63,7 +63,7 @@ const LagosParallel = () => {
       .slice(0, 8);
 
     return last10UniqueDates;
-  };
+  };  
 
   // Function to get all unique currency names from the data
   const getUniqueCurrencyNames = (data) => {
@@ -81,7 +81,7 @@ const LagosParallel = () => {
   return (
     <section className="px-0 sm:px-4 mt-5 sm:mt-0 overflow-auto h-[500px] w-[100%]">
       <div className="mb-4">
-        <h2 className="font-bold text-[26px] sm:text-[28px] font-lato leading-tight">
+        <h2 className="font-bold text-[26px] sm:text-[28px] font-lato leading-tight border-b-[2px] border-gray-300 pb-2">
           Parallel Rates (USD, EUR, GBP)
         </h2>
         <small className="text-[#3c9c3c] font-bold">

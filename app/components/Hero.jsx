@@ -17,7 +17,7 @@ const Hero = () => {
           <MarketNews />
         </div>
       </div>
-
+      <hr className="mt-16"/>
       <CurrencyConverter />
     </section>
   );

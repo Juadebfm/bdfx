@@ -264,7 +264,7 @@ const CurrencyConverter = () => {
           <div className="flex items-center justify-center border border-black w-full sm:w-0 basis-[100%] sm:basis-[45%] h-[92.98px] py-8 sm:py-0 px-4 mb-1 sm:mb-0">
             <div className="flex flex-col items-start justify-center gap-4 w-full">
               <label htmlFor="Amount" className="font-lato text-[14px]">
-                Amount
+                Converted To
               </label>
               <input
                 type="text"

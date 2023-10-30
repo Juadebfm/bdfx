@@ -218,7 +218,7 @@ const CurrencyConverter = () => {
           institutions. Always verify rates with official sources before making
           any financial decisions
         </small>
-        <div className="flex flex-col sm:flex-row items-center justify-between mt-10 relative">
+        <div className="flex flex-col sm:flex-row items-center justify-between mt-10 py-1 relative">
           {validationMessage && (
             <div className="absolute flex gap-2 items-start sm:items-center -bottom-12 sm:-bottom-8 font-bold text-[#F91212] text-sm">
               <FaExclamation className="border border-[#F91212] font-bold rounded-full mt-[0.20rem]" />
@@ -228,10 +228,10 @@ const CurrencyConverter = () => {
           <span className="absolute flex gap-2 items-center -bottom-20 sm:-bottom-10 sm:right-0 font-bold text-sm">
             {selectedCurrencyRate}
           </span>
-          <div className="flex items-center justify-center border border-black w-full sm:w-0 basis-[100%] sm:basis-[45%] h-[92.98px] py-8 sm:py-0 px-4 mb-5 sm:mb-0">
+          <div className="flex items-center justify-center border border-black w-full sm:w-0 basis-[100%] sm:basis-[45%] h-[120px] py-8 sm:py-0 px-4 mb-5 sm:mb-0">
             <div className="flex flex-col items-start justify-center gap-4 w-full">
-              <label htmlFor="Amount" className="font-lato text-[14px]">
-                Amount
+              <label htmlFor="Amount" className="font-lato font-bold text-[14px]">
+                Amount In Naira
               </label>
               <input
                 id="AmountToConvert"
@@ -239,13 +239,10 @@ const CurrencyConverter = () => {
                 placeholder="Amount"
                 value={inputValue1}
                 onChange={handleInputChange1}
-                className="placeholder:font-lato placeholder:text-[12px] sm:placeholder:text-[14px] font-bold border-0 pl-2 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-full sm:w-auto"
+                className="placeholder:font-lato placeholder:text-[12px] sm:placeholder:text-[14px] font-bold border-0 pl-2 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-[100%] sm:w-auto"
               />
             </div>
-            <div className="flex flex-col items-end justify-between gap-4 font-lato text-[14px] w-full">
-              <label htmlFor="Currency" className="font-lato text-[14px]">
-                In Naira
-              </label>
+            <div className="flex flex-col items-end justify-between gap-4 font-lato text-[14px] w-auto">
               <select
                 id="firstSelect"
                 value={haveCurrency}
@@ -260,10 +257,10 @@ const CurrencyConverter = () => {
             </div>
           </div>
           <BiTransferAlt className="basis-[10%] text-3xl mb-5 sm:mb-0" />
-          <div className="flex items-center justify-center border border-black w-full sm:w-0 basis-[100%] sm:basis-[45%] h-[92.98px] py-8 sm:py-0 px-4 mb-1 sm:mb-0">
+          <div className="flex items-center justify-center border border-black w-full sm:w-0 basis-[100%] sm:basis-[45%] h-[120px] py-8 sm:py-0 px-4 mb-1 sm:mb-0">
             <div className="flex flex-col items-start justify-center gap-4 w-full">
-              <label htmlFor="Amount" className="font-lato text-[14px]">
-                Converted To
+              <label htmlFor="Amount" className="font-lato font-bold text-[14px]">
+                {`Amount in ${wantCurrency}`}
               </label>
               <input
                 type="text"
@@ -275,10 +272,7 @@ const CurrencyConverter = () => {
                 value={inputValue2}
               />
             </div>
-            <div className="flex flex-col items-end justify-between gap-4 font-lato text-[14px] w-full">
-              <label htmlFor="Currency" className="font-lato text-[14px]">
-                Currency
-              </label>
+            <div className="flex flex-col items-end justify-between gap-4 font-lato text-[14px] w-auto">
               <select
                 id="secondSelect"
                 value={wantCurrency}

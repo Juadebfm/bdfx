@@ -225,7 +225,7 @@ const CurrencyConverter = () => {
               {validationMessage}
             </div>
           )}
-          <span className="absolute flex gap-2 items-center -bottom-20 sm:-bottom-10 sm:right-0 font-bold text-sm">
+          <span className="absolute flex gap-2 items-center -bottom-20 sm:-bottom-8 sm:right-0 font-bold text-sm">
             {selectedCurrencyRate}
           </span>
           <div className="flex items-center justify-center border border-black w-full sm:w-0 basis-[100%] sm:basis-[45%] h-[120px] py-8 sm:py-0 px-4 mb-5 sm:mb-0">

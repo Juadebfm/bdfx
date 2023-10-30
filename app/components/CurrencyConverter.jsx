@@ -53,38 +53,38 @@ const CurrencyConverter = () => {
     try {
       let apiUrl;
       let response;
-  
+
       // Determine the API URL based on selected wantCurrency
       if (["USD", "GBP", "EUR"].includes(wantCurrency)) {
         apiUrl = "https://abokifx.com/api/v1/rates/movement";
       } else {
         apiUrl = "https://abokifx.com/api/v1/rates/otherparallel";
       }
-  
+
       // Define the request headers
       const headers = {
         Accept: "application/json",
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_ABOKI_KEY}`, // Replace with your actual token
       };
-  
+
       // Make the API request
       response = await fetch(apiUrl, { headers });
-  
+
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-  
+
       const data = await response.json();
       setApiData(data); // Store the response data in state
-  
-      // If the data for the selected currency is not available for the current date, 
+
+      // If the data for the selected currency is not available for the current date,
       // iterate through historical data to find the most recent date with the data.
       if (data && wantCurrency) {
         const dates = Object.keys(data.response);
         let currencyData = data.response[dates[0]].find(
           (item) => item.currency_name === wantCurrency
         );
-  
+
         // If currency data is not found for the current date, look for it in previous dates.
         if (!currencyData) {
           for (let i = 1; i < dates.length; i++) {
@@ -96,14 +96,14 @@ const CurrencyConverter = () => {
             }
           }
         }
-  
+
         // Update exchange rate data with the found currency rate.
         if (currencyData) {
           const parts = currencyData.currency_rate.split("/");
           const lastPart = parts[1].trim();
           const cleanRate = lastPart.replace("*", "");
           setExchangeRate(parseFloat(cleanRate));
-  
+
           const formattedRate = `1.00 ${wantCurrency} = ${cleanRate} NGN`;
           setSelectedCurrencyRate(formattedRate);
         }
@@ -112,7 +112,6 @@ const CurrencyConverter = () => {
       console.error("Error fetching data:", error);
     }
   };
-  
 
   useEffect(() => {
     if (wantCurrency) {
@@ -194,7 +193,7 @@ const CurrencyConverter = () => {
 
   const calculateConvertedValue = (amount, exchangeRate) => {
     if (!isNaN(amount) && !isNaN(exchangeRate)) {
-      return (amount * exchangeRate).toFixed(2);
+      return (amount / exchangeRate).toFixed(2);
     }
     return "";
   };

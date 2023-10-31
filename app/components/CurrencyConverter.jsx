@@ -265,8 +265,9 @@ const CurrencyConverter = () => {
               <input
                 type="text"
                 placeholder={
-                  inputValue1 ? `Converting to ${wantCurrency}` : "Amount"
+                  inputValue1 ? `Converting to ${wantCurrency}` : "Converted Value From NGN"
                 }
+                disabled
                 onChange={handleInputChange2}
                 className="placeholder:font-lato placeholder:text-[12px] sm:placeholder:text-[14px] font-bold border-0 pl-0 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-full sm:w-auto"
                 value={inputValue2}

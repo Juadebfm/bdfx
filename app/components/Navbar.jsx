@@ -223,7 +223,18 @@ const Navbar = () => {
               }
               passHref
             >
-              Rates
+              FX Rates
+            </Link>
+            <Link
+              href="/cryptorates"
+              className={
+                pathname == "/cryptorates"
+                  ? "active_class"
+                  : "hover:text-slate-600 duration-200 transition-all ease-linear"
+              }
+              passHref
+            >
+              Crypto Rates
             </Link>
             <Link
               href="https://businessday.ng/"
@@ -237,16 +248,28 @@ const Navbar = () => {
               Business News
             </Link>
             <Link
-              href="/analytics"
+              href="https://businessday.ng/category/art-and-travel/"
+              passHref
               className={
-                pathname == "/analytics"
+                pathname == "https://businessday.ng/category/art-and-travel/"
                   ? "active_class"
                   : "hover:text-slate-600 duration-200 transition-all ease-linear"
               }
-              passHref
             >
-              Analytics
+              Travel
             </Link>
+            <Link
+              href="https://businessday.ng/category/sports/"
+              passHref
+              className={
+                pathname == "https://businessday.ng/category/sports/"
+                  ? "active_class"
+                  : "hover:text-slate-600 duration-200 transition-all ease-linear"
+              }
+            >
+              Sports
+            </Link>
+
             <Link
               href="https://conferences.businessday.ng/"
               passHref
@@ -257,18 +280,6 @@ const Navbar = () => {
               }
             >
               BD Conferences
-            </Link>
-
-            <Link
-              href="/contact"
-              className={
-                pathname == "/contact"
-                  ? "active_class"
-                  : "hover:text-slate-600 duration-200 transition-all ease-linear"
-              }
-              passHref
-            >
-              Contact
             </Link>
           </ul>
         </nav>
@@ -292,7 +303,10 @@ const Navbar = () => {
         />
         <div className="flex flex-col mt-4 space-y-5">
           <Link className="border-b border-gray-800 pb-4" href="/">
-            Rates
+            FX Rates
+          </Link>
+          <Link className="border-b border-gray-800 pb-4" href="/cryptorates">
+            Crypto Rates
           </Link>
           <Link
             className="border-b border-gray-800 pb-4"
@@ -301,8 +315,17 @@ const Navbar = () => {
           >
             Business News
           </Link>
-          <Link className="border-b border-gray-800 pb-4" href="/analytics">
-            Analytics
+          <Link
+            className="border-b border-gray-800 pb-4"
+            href="https://businessday.ng/category/art-and-travel"
+          >
+            Travel
+          </Link>
+          <Link
+            className="border-b border-gray-800 pb-4"
+            href="https://businessday.ng/category/sports/"
+          >
+            Sports
           </Link>
           <Link
             className="border-b border-gray-800 pb-4"
@@ -310,10 +333,6 @@ const Navbar = () => {
             target="_blank"
           >
             BD Conferences
-          </Link>
-
-          <Link className="border-b border-gray-800 pb-4" href="/contact">
-            Contact
           </Link>
         </div>
         <BiX

@@ -8,6 +8,8 @@ import MarketNews from "./MarketNews";
 const Hero = () => {
   return (
     <section className="m-auto w-[95%]">
+      <CurrencyConverter />
+      <hr className="mt-16" />
       <div className="hero_grid w-[100%] mt-8">
         <div className="">
           <LagosParallel />
@@ -17,8 +19,6 @@ const Hero = () => {
           <MarketNews />
         </div>
       </div>
-      <hr className="mt-16"/>
-      <CurrencyConverter />
     </section>
   );
 };

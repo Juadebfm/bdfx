@@ -292,7 +292,7 @@ const Navbar = () => {
         id="mobile_nav"
         className={`${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } absolute z-[999] top-[44.5px] px-10 flex flex-col bg-black border-t-4 border-red-600 text-white w-1/2 h-[100vh] transition-transform duration-200 ease-in-out transform`}
+        } absolute z-[999] top-[44.5px] px-10 flex flex-col bg-black border-t-4 border-red-600 text-white w-[65%] h-[100vh] transition-transform duration-200 ease-in-out transform`}
       >
         <Image
           src={logoImg}

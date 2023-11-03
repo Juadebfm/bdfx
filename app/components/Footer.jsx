@@ -14,8 +14,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-t-black w-full m-auto mt-8 sm:mt-0 px-5 sm:px-8 pt-8 sm:pt-12 sm:h-[50vh] font-lato text-[14px] text-gray-800 h-full">
-      <section className="flex flex-col lg:flex-row items-start justify-between gap-[5%]">
+    <footer className="border-t border-t-black w-full m-auto mt-8 sm:mt-0 px-5 sm:px-10 pt-8 sm:pt-12 sm:h-[50vh] font-lato text-[14px] text-gray-800 h-full">
+      <section className="flex flex-col lg:flex-row items-start justify-between gap-[5%] mb-6">
         <div className="basis-[23%] flex flex-col items-start justify-start">
           <Image
             src={logoImg}
@@ -61,23 +61,23 @@ const Footer = () => {
             More
           </h3>
           <div className="flex flex-col mt-4 space-y-5">
-            <Link className="" href="/">
+            <Link className="" href="/currentrates">
               Current Rates
             </Link>
-            <Link className="" href="/businessnews">
-              Lagos Rates
-            </Link>
-            <Link className="" href="/analytics">
-              Other Rates
+
+            <Link href="mailto:subscription@business.ng">
+              For Digital Adverts: <br /> subscription@business.ng
             </Link>
 
-            <div>
-              <p>Contact:</p>
-              <Link href="mailto:subscription@business.ng">
-                For Digital Adverts: <br /> subscription@business.ng
-              </Link>
-              <Link href=""></Link>
-            </div>
+            <Link href="tel:+2348068545123">
+              Phone: <br /> +2348068545123
+            </Link>
+
+            <Link href="mailto:customercare@businessday.ng">
+              Customer Care: <br /> customercare@businessday.ng
+            </Link>
+
+            <Link href="/contact">Other Contact Information</Link>
           </div>
         </div>
         <div className="my-5 lg:my-0 basis-[23%]">
@@ -85,6 +85,23 @@ const Footer = () => {
             OTHER PAGES
           </h3>
           <div className="flex flex-col mt-4 space-y-5">
+            <Link className="" href="https://businessday.ng/" target="_blank">
+              Business News
+            </Link>
+            <Link
+              className=""
+              href="https://businessday.ng/category/art-and-travel/"
+              target="_blank"
+            >
+              Travel
+            </Link>
+            <Link
+              className=""
+              href="https://businessday.ng/category/sports/"
+              target="_blank"
+            >
+              Sports
+            </Link>
             <Link
               className=""
               href="https://conferences.businessday.ng/"
@@ -125,7 +142,7 @@ const Footer = () => {
           </form>
         </div>
       </section>
-      <section className="text-slate-500 text-sm font-lato mt-3 mb-20 sm:mb-0 text-center sm:text-start">
+      <section className="text-slate-500 text-sm font-lato mt-3 mb-20 sm:mb-4 text-center sm:text-start">
         <p>© {currentYear} - Businessday NG. All Rights Reserved.</p>
       </section>
     </footer>

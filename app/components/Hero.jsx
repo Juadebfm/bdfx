@@ -7,17 +7,15 @@ import MarketNews from "./MarketNews";
 
 const Hero = () => {
   return (
-    <section className="m-auto w-[95%]">
-      <CurrencyConverter />
-      <hr className="mt-16" />
+    <section className="m-auto w-[95%] md:w-full lg:w-[95%]">
       <div className="hero_grid w-[100%] mt-8">
-        <div className="">
-          <LagosParallel />
-          <CurrentRates />
-        </div>
-        <div className="">
-          <MarketNews />
-        </div>
+        <CurrencyConverter />
+        <MarketNews />
+      </div>
+      <hr className="mt-16" />
+      <div className="">
+        <LagosParallel/>
+        <CurrentRates />
       </div>
     </section>
   );

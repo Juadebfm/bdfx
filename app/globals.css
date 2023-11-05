@@ -35,11 +35,11 @@
 .hero_grid
  {
   display: grid;
-  grid-template-columns: 75% 22%;
+  grid-template-columns: 70% 26%;
   gap: 3%;
  }
 
- @media (max-width: 768px) { 
+ @media (max-width: 900px) { 
   .hero_grid {
     grid-template-columns: 100%;
   }

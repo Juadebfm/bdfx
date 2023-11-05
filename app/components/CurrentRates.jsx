@@ -59,7 +59,7 @@ const CurrentRates = () => {
         }
         return false;
       })
-      .slice(0, 5);
+      .slice(0, 15);
 
     return last10UniqueDates;
   };
@@ -78,7 +78,7 @@ const CurrentRates = () => {
   };
 
   return (
-    <section className="px-0 sm:px-4 mt-5 sm:mt-3 overflow-auto h-auto w-[100%]">
+    <section className="px-2 sm:px-4 m-auto mt-5 sm:mt-16 overflow-auto md:overflow-hidden h-auto w-[95%] lg:w-[80%] md:w-full">
       <div className="mb-4">
         <h2 className="font-bold text-[26px] sm:text-[28px] font-lato leading-tight border-b-[2px] border-gray-300 pb-2">
           Parallel Rates (Others)
@@ -131,7 +131,7 @@ const CurrentRates = () => {
                     )}
                     <span>{currencyName}</span>
                   </div>
-                  <span className="mt-0 sm:mt-2 !text-[#3c9c3c]">BUY/SELL</span>
+                  <span className="mt-0 sm:mt-2 text-[10px] sm:text-base !text-[#3c9c3c]">BUY/SELL</span>
                 </th>
               ))}
             </tr>
@@ -151,7 +151,7 @@ const CurrentRates = () => {
                   return (
                     <td
                       key={currencyName}
-                      className="py-2 sm:py-1"
+                      className="py-4 px-2"
                       style={{ border: "1px solid #ccc" }}
                     >
                       {currencyRate && currencyRate.currency_rate !== "N/A"

@@ -154,7 +154,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="w-full">
+    <header className="w-full md:overflow-x-hidden">
       <section className="w-full text-[14px] text-center sm:text-start bg-black text-white px-5 sm:px-32 py-3">
         {currentDate}
       </section>

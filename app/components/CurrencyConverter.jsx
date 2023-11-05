@@ -205,14 +205,14 @@ const CurrencyConverter = () => {
   }, 1000);
 
   return (
-    <section className="mt-14 sm:mt-12 w-full sm:w-[90%] md:w-[100%] lg:w-[80%] px-1 sm:px-0 m-auto text-center">
+    <section className="mt-14 sm:mt-12 w-full px-1 sm:px-3 m-auto text-center">
       <h1 className="font-bold text-[26px] sm:text-[30px] font-lato leading-tight">
         Currency Converter
       </h1>
       <p className="font-roboto text-gray-700 text-base sm:text-[17px]">
         Instantly Calculate Exchange Rates and Values
       </p>
-      <div className="border border-slate-200 rounded-xl shadow-2xl h-max mt-10 px-5 sm:px-14 md:px-5 lg:px-14 py-20 pb-12">
+      <div className="border border-slate-200 rounded-xl shadow-2xl h-max mt-10 px-5 sm:px-14 md:px-10 lg:px-14 py-20 pb-12">
         <small className="font-lato text-[14px]">
           Exchange rates can fluctuate frequently and can vary between financial
           institutions. Always verify rates with official sources before making

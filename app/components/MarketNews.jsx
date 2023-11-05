@@ -101,8 +101,8 @@ const MarketNews = () => {
           <p>Loading...</p>
         ) : (
           <div className="mt-6">
-            {feedData.map((item, index) => (
-              <div key={index} className="mb-6">
+            {feedData.slice(0, 3).map((item, index) => (
+              <div key={index} className="mb-6 pb-3 border-b border-slate-300">
                 <Link href={item.link} target="_blank">
                   <img
                     src={item.description.match(/<img[^>]+src="([^">]+)"/)[1]}

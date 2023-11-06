@@ -17,6 +17,7 @@ const CurrencyConverter = () => {
   const [selectedCurrencyRate, setSelectedCurrencyRate] = useState("");
 
   const [exchangeRate, setExchangeRate] = useState(null);
+  
 
   const calculateExchangeRate = () => {
     if (apiData && wantCurrency) {

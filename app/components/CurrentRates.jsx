@@ -151,7 +151,7 @@ const CurrentRates = () => {
                   return (
                     <td
                       key={currencyName}
-                      className="py-4 px-2"
+                      className="py-2 sm:py-2 sm:px-3"
                       style={{ border: "1px solid #ccc" }}
                     >
                       {currencyRate && currencyRate.currency_rate !== "N/A"

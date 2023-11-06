@@ -10,6 +10,7 @@ const CurrencyConverter = () => {
   const [inputValue2, setInputValue2] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
   const [haveCurrency, setHaveCurrency] = useState("NGN");
+  const [haveCurrency2, setHaveCurrency2] = useState("NGN"); // Step 1
   const [wantCurrency, setWantCurrency] = useState("AED");
 
   const [apiData, setApiData] = useState(null);
@@ -151,31 +152,26 @@ const CurrencyConverter = () => {
   const handleInputChange1 = (event) => {
     const newValue = event.target.value;
     setInputValue1(newValue);
-    setInputValue2("");
-    setHaveCurrency("NGN");
     setValidationMessage("");
 
     if (!/^\d*\.?\d*$/.test(newValue)) {
       setValidationMessage("Please Input a valid number.");
     } else {
       setValidationMessage("");
-      debouncedInputChange(newValue);
+      debouncedInputChange(newValue, true); // Pass 'true' to indicate NGN to other currency conversion
     }
   };
 
   const handleInputChange2 = (event) => {
     const newValue = event.target.value;
     setInputValue2(newValue);
-    setInputValue1("");
-    setHaveCurrency(wantCurrency);
     setValidationMessage("");
 
-    if (!/^\d+$/.test(newValue)) {
-      setValidationMessage(
-        "Please Input a number. Letters & Symbols are Invalid"
-      );
+    if (!/^\d*\.?\d*$/.test(newValue)) {
+      setValidationMessage("Please Input a valid number.");
     } else {
       setValidationMessage("");
+      debouncedInputChange(newValue, false); // Pass 'false' to indicate other currency to NGN conversion
     }
   };
 
@@ -191,18 +187,53 @@ const CurrencyConverter = () => {
     setWantCurrency(newValue);
   };
 
-  const calculateConvertedValue = (amount, exchangeRate) => {
+  // Updated calculateConvertedValue function to handle both conversions
+  const calculateConvertedValue = (amount, exchangeRate, isToNGN) => {
     if (!isNaN(amount) && !isNaN(exchangeRate)) {
-      return (amount / exchangeRate).toFixed(2);
+      if (isToNGN) {
+        return (amount / exchangeRate).toFixed(2); // Convert to NGN
+      } else {
+        return (amount * exchangeRate).toFixed(2); // Convert from NGN
+      }
     }
     return "";
   };
 
   // Debounce input changes and perform conversion after 1000ms
-  const debouncedInputChange = debounce((amount) => {
-    const convertedValue = calculateConvertedValue(amount, exchangeRate);
-    setInputValue2(convertedValue);
+  const debouncedInputChange = debounce((amount, isToNGN) => {
+    const convertedValue = calculateConvertedValue(
+      amount,
+      exchangeRate,
+      isToNGN
+    );
+    if (isToNGN) {
+      setInputValue2(convertedValue);
+    } else {
+      setInputValue1(convertedValue);
+    }
   }, 1000);
+
+  useEffect(() => {
+    if (exchangeRate && inputValue1) {
+      const convertedValue = calculateConvertedValue(
+        inputValue1,
+        exchangeRate,
+        false
+      );
+      setInputValue2(convertedValue);
+    }
+  }, [wantCurrency, exchangeRate]);
+
+  useEffect(() => {
+    if (exchangeRate && inputValue2) {
+      const convertedValue = calculateConvertedValue(
+        inputValue2,
+        exchangeRate,
+        true
+      );
+      setInputValue1(convertedValue);
+    }
+  }, [haveCurrency2, exchangeRate]);
 
   return (
     <section className="mt-14 sm:mt-12 w-full px-1 sm:px-3 m-auto text-center">
@@ -230,7 +261,10 @@ const CurrencyConverter = () => {
           </span>
           <div className="flex items-center justify-center border border-black w-full sm:w-0 basis-[100%] sm:basis-[45%] h-[120px] py-8 sm:py-0 px-4 mb-5 sm:mb-0">
             <div className="flex flex-col items-start justify-center gap-4 w-full">
-              <label htmlFor="Amount" className="font-lato font-bold text-[14px]">
+              <label
+                htmlFor="Amount"
+                className="font-lato font-bold text-[14px]"
+              >
                 Amount In Naira
               </label>
               <input
@@ -259,15 +293,20 @@ const CurrencyConverter = () => {
           <BiTransferAlt className="basis-[10%] text-3xl mb-5 sm:mb-0" />
           <div className="flex items-center justify-center border border-black w-full sm:w-0 basis-[100%] sm:basis-[45%] h-[120px] py-8 sm:py-0 px-4 mb-1 sm:mb-0">
             <div className="flex flex-col items-start justify-center gap-4 w-full">
-              <label htmlFor="Amount" className="font-lato font-bold text-[14px]">
+              <label
+                htmlFor="Amount"
+                className="font-lato font-bold text-[14px]"
+              >
                 {`Amount in ${wantCurrency}`}
               </label>
               <input
                 type="text"
                 placeholder={
-                  inputValue1 ? `Converting to ${wantCurrency}` : "Converted Value From NGN"
+                  inputValue1
+                    ? `Converting to ${wantCurrency}`
+                    : "Converted Value From NGN"
                 }
-                disabled
+                // disabled
                 onChange={handleInputChange2}
                 className="placeholder:font-lato placeholder:text-[12px] sm:placeholder:text-[14px] font-bold border-0 pl-0 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-full sm:w-auto"
                 value={inputValue2}

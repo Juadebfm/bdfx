@@ -63,7 +63,7 @@ const LagosParallel = () => {
       .slice(0, 15);
 
     return last10UniqueDates;
-  };  
+  };
 
   // Function to get all unique currency names from the data
   const getUniqueCurrencyNames = (data) => {
@@ -79,7 +79,7 @@ const LagosParallel = () => {
   };
 
   return (
-    <section className="px-2 sm:px-4 m-auto mt-5 sm:mt-16 overflow-auto h-auto w-[100%] lg:w-[80%] md:w-full">
+    <section className="px-2 sm:px-4 m-auto mt-5 sm:mt-16 overflow-auto h-auto w-[100%] lg:w-[90%] md:w-full">
       <div className="mb-4">
         <h2 className="font-bold text-[26px] sm:text-[28px] font-lato leading-tight border-b-[2px] border-gray-300 pb-2">
           Parallel Rates (USD, EUR, GBP)
@@ -91,7 +91,7 @@ const LagosParallel = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <table className="w-full mt-3">
+        <table className="w-full mt-3 h-auto">
           <thead className="table-header-group text-sm sm:text-base">
             <tr>
               <th className="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-5 mt-2 mb-4">
@@ -148,7 +148,7 @@ const LagosParallel = () => {
                   return (
                     <td
                       key={currencyName}
-                      className="py-2 sm:py-1"
+                      className="py-2 sm:py-2 sm:px-3"
                       style={{ border: "1px solid #ccc" }}
                     >
                       {currencyRate ? currencyRate.currency_rate : "N/A"}

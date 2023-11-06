@@ -186,6 +186,9 @@ const CurrencyConverter = () => {
   const handleCurrencyChange = (event) => {
     const newValue = event.target.value;
     setWantCurrency(newValue);
+    // Clear both input values when the currency changes
+    setInputValue1("");
+    setInputValue2("");
   };
 
   // Updated calculateConvertedValue function to handle both conversions

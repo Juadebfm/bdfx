@@ -84,7 +84,7 @@ $ yarn start
 # The server will initialize in the <http://localhost:3000>
 ```
 
-Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
+Made with :heart: by <a href="https://github.com/Juadebfm" target="_blank">Juadeb Gabriel FM</a>
 
 &#xa0;
 

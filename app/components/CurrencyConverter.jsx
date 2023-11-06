@@ -243,7 +243,7 @@ const CurrencyConverter = () => {
       <p className="font-roboto text-gray-700 text-base sm:text-[17px]">
         Instantly Calculate Exchange Rates and Values
       </p>
-      <div className="border border-slate-200 rounded-xl shadow-2xl h-max mt-10 px-5 sm:px-14 md:px-10 lg:px-14 py-20 pb-12">
+      <div className="border border-slate-200 rounded-xl shadow-2xl h-max mt-10 px-5 sm:px-14 md:px-10 lg:px-10 py-20 pb-12">
         <small className="font-lato text-[14px]">
           Exchange rates can fluctuate frequently and can vary between financial
           institutions. Always verify rates with official sources before making
@@ -273,7 +273,7 @@ const CurrencyConverter = () => {
                 placeholder="Amount"
                 value={inputValue1}
                 onChange={handleInputChange1}
-                className="placeholder:font-lato placeholder:text-[12px] sm:placeholder:text-[14px] font-bold border-0 pl-2 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-[100%] sm:w-auto"
+                className="placeholder:font-lato placeholder:text-[12px] sm:placeholder:text-[14px] font-bold border-0 pl-2 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] w-[100%] sm:w-auto"
               />
             </div>
             <div className="flex flex-col items-end justify-between gap-4 font-lato text-[14px] w-auto">
@@ -301,14 +301,10 @@ const CurrencyConverter = () => {
               </label>
               <input
                 type="text"
-                placeholder={
-                  inputValue1
-                    ? `Converting to ${wantCurrency}`
-                    : "Converted Value From NGN"
-                }
+                placeholder="Amount"
                 // disabled
                 onChange={handleInputChange2}
-                className="placeholder:font-lato placeholder:text-[12px] sm:placeholder:text-[14px] font-bold border-0 pl-0 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] mt-1 w-full sm:w-auto"
+                className="placeholder:font-lato placeholder:text-[12px] sm:placeholder:text-[14px] font-bold border-0 pl-0 focus:outline-none focus:ring-0 focus:border-b focus:border-b-[#F91212] w-full sm:w-auto"
                 value={inputValue2}
               />
             </div>

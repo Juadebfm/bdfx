@@ -12,7 +12,6 @@ const Hero = () => {
         <CurrencyConverter />
         <MarketNews />
       </div>
-      <hr className="mt-16" />
       <div className="">
         <LagosParallel/>
         <CurrentRates />

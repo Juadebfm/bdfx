@@ -79,7 +79,7 @@ const LagosParallel = () => {
   };
 
   return (
-    <section className="px-2 sm:px-4 m-auto mt-5 sm:mt-16 overflow-auto h-auto w-[100%] lg:w-[90%] md:w-full">
+    <section className="px-2 sm:px-4 m-auto mt-5 sm:mt-2 overflow-auto h-auto w-[100%] lg:w-[90%] md:w-full">
       <div className="mb-4">
         <h2 className="font-bold text-[26px] sm:text-[28px] font-lato leading-tight border-b-[2px] border-gray-300 pb-2">
           Parallel Rates (USD, EUR, GBP)
